@@ -1,1 +1,1 @@
-CREATE DATABASE app0 COLLATE 'utf8_unicode_ci';
+CREATE DATABASE projetoDw3 COLLATE 'utf8_unicode_ci';
