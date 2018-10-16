@@ -4,26 +4,25 @@ namespace Modelo;
 use \PDO;
 use \Framework\DW3BancoDeDados;
 
-class User extends Modelo
+class Agency extends Modelo
 {
-    const FIND_BY_EMAIL = 'SELECT * FROM users WHERE email = ? LIMIT 1';
-    const FIND_BY_ID = 'SELECT * FROM users WHERE id = ? LIMIT 1';
-    const INSERT = 'INSERT INTO users(email,pwd, username) VALUES (?, ?, ?)';
+    const FIND_BY_EMAIL = 'SELECT * FROM public_agencies WHERE email = ? LIMIT 1';
+    const INSERT = 'INSERT INTO public_agencies(email,pwd, agency_name) VALUES (?, ?, ?)';
     private $id;
     private $email;
-    private $username;
+    private $agencyName;
     private $pwd;
     private $senhaPlana;
 
     public function __construct(
         $email,
         $pwd,
-        $username,
+        $agencyName,
         $id = null
     ) {
         $this->id = $id;
         $this->email = $email;
-        $this->username = $username;
+        $this->agencyName = $agencyName;
         $this->senhaPlana = $pwd;
         $this->pwd = password_hash($pwd, PASSWORD_BCRYPT);
     }
@@ -38,12 +37,12 @@ class User extends Modelo
         return $this->email;
     }
 
-    public function getUsername()
+    public function getAgencyName()
     {
-        return $this->username;
+        return $this->agencyName;
     }
 
-    public function verifyPwd($senhaPlana)
+    public function verificarSenha($senhaPlana)
     {
         return password_verify($senhaPlana, $this->pwd);
     }
@@ -69,7 +68,7 @@ class User extends Modelo
         $comando = DW3BancoDeDados::prepare(self::INSERT);
         $comando->bindValue(1, $this->email, PDO::PARAM_STR);
         $comando->bindValue(2, $this->pwd, PDO::PARAM_STR);
-        $comando->bindValue(3, $this->username, PDO::PARAM_STR);
+        $comando->bindValue(3, $this->agencyName, PDO::PARAM_STR);
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
         DW3BancoDeDados::getPdo()->commit();
@@ -83,7 +82,7 @@ class User extends Modelo
         $objeto = null;
         $registro = $comando->fetch();
         if ($registro) {
-            $objeto = new User(
+            $objeto = new Agency(
                 $registro['email'],
                 '',
                 null,
@@ -93,25 +92,4 @@ class User extends Modelo
         }
         return $objeto;
     }
-    
-    public static function findById($ID)
-    {
-        $comando = DW3BancoDeDados::prepare(self::FIND_BY_ID);
-        $comando->bindValue(1, $ID, PDO::PARAM_STR);
-        $comando->execute();
-        $objeto = null;
-        $registro = $comando->fetch();
-        if ($registro) {
-            $objeto = new User(
-                $registro['email'],
-                '',
-                $registro['username'],
-                $registro['id']
-            );
-            $objeto->pwd = $registro['pwd'];
-        }
-        return $objeto;
-    }
-
-
 }

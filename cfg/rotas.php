@@ -4,14 +4,25 @@ $rotas = [
     '/' => [
         'GET' => '\Controlador\AppControlador#index',
     ],
-    '/empresa' => [ 
-        'GET' => '\Controlador\EmpresaControlador#index'
+    '/user' => [ 
+        'GET' => '\Controlador\UserControlador#index',
+        'POST' => '\Controlador\UserControlador#create'
     ],
-    '/empresa/new' => [
-        'GET' => '\Controlador\EmpresaControlador#new'
+    '/user/new' => [
+        'GET' => '\Controlador\UserControlador#new'
     ],
-    '/empresa/licitacao' => [
-        'GET' => '\Controlador\LicitacaoEmpresaControlador#show'
+    '/user/bidding' => [
+        'GET' => '\Controlador\BinddinsUserControlador#show'
+    ],
+    '/agency' => [ 
+        'GET' => '\Controlador\AgencyControlador#index',
+        'POST' => '\Controlador\AgencyControlador#create'
+    ],
+    '/agency/new' => [
+        'GET' => '\Controlador\AgencyControlador#new'
     ], 
-
+    '/user/login/new' => [
+        'GET' => '\Controlador\UserLoginControlador#new',
+        'POST' => '\Controlador\UserLoginControlador#session'
+    ],
 ];

@@ -1,9 +1,9 @@
 <?php
 
-const APLICACAO_NOME = 'projetoDw3';
+const APLICACAO_NOME = 'LicitacoesOnline';
 
 // Se a URL_RAIZ mudar, verifique arquivo .htaccess
-const URL_RAIZ = '/web3/projetoDw3/';
+const URL_RAIZ = '/web3/LicitacoesOnline/';
 
 // Os caminhos sempre devem terminar com '/'
 
