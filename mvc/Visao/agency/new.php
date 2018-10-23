@@ -21,7 +21,7 @@
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="submit" class="btn btn-success center-block">Cadastrar</button>
-                <button href="<?= URL_RAIZ ?>" class="btn btn-danger">Voltar</button>
+                <a href="<?= URL_RAIZ . 'user' ?>" class="btn btn-danger">Voltar</a>
             </div>
         </form>
     </div>

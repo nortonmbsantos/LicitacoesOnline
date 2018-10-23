@@ -8,7 +8,7 @@ class UserLoginControlador extends Controlador
 {
     public function new()
     {
-        $this->visao('user/login/new.php');
+        $this->visao('user/login/new.php', ['user' => $user = $this->getUser()]);
     }
 
     public function session()

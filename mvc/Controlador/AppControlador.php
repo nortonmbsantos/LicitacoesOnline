@@ -8,7 +8,6 @@ class AppControlador extends Controlador
 {
     public function index()
     {
-        $user = User::findById($this->getUser());
-        $this->visao('inicial/index.php', ['user' => $user]);
+        $this->visao('inicial/index.php', ['user' => $user = $this->getUser()]);
     }
 }

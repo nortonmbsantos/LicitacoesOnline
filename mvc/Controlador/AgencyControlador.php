@@ -7,12 +7,12 @@ class AgencyControlador extends Controlador
 {
     public function index()
     {
-        $this->visao('agency/index.php');
+        $this->visao('agency/index.php', ['user' => $user = $this->getUser()]);
     }
 
     public function new()
     {
-        $this->visao('agency/new.php');
+        $this->visao('agency/new.php', ['user' => $user = $this->getUser()]);
     }
 
     public function create()
