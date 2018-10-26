@@ -8,13 +8,11 @@ class UserControlador extends Controlador
 {
     public function index()
     {
-        $user = User::findById($this->getUser());
         $this->visao('user/index.php', ['user' => $user = $this->getUser()]);
     }
 
     public function new()
     {
-        $user = User::findById($this->getUser());
         $this->visao('user/new.php', ['user' => $user = $this->getUser()]);
     }
 

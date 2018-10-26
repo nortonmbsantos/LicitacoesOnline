@@ -26,7 +26,8 @@
     <div class="card-body">
       <h5 class="card-title">Sou uma empresa</h5>
       <p class="card-text">Empresas que desejam participar das licitaçẽs. Acesse aqui ou utilize o  login no navbar.</p>
-      <a href="<?= URL_RAIZ . 'user/new' ?>" class="btn btn-primary">Formulário de cadastro</a>
+      <a href="<?= URL_RAIZ . 'user/new' ?>" class="btn btn-primary">Cadastre-se</a>
+      <a href="<?= URL_RAIZ . 'user/login/new' ?>" class="btn btn-primary float-right">Login</a>
     </div>
   </div>
 
@@ -37,7 +38,8 @@
     <div class="card-body">
       <h5 class="card-title">Sou um Orgão Público</h5>
       <p class="card-text">Orgãos Públicos que desejam criar licitaçẽs.</p>
-      <a href="<?= URL_RAIZ . 'agency/new' ?>" class="btn btn-primary">Formulário de cadastro</a>
+      <a href="<?= URL_RAIZ . 'agency/new' ?>" class="btn btn-primary">Cadastre-se</a>
+      <a href="<?= URL_RAIZ . 'agency/login/new' ?>" class="btn btn-primary float-right">Login</a>
     </div>
   </div>
 </div>

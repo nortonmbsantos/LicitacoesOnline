@@ -11,8 +11,9 @@ abstract class Controlador extends DW3Controlador
     use ControladorVisao;
     
     protected $user;
-
-	protected function verificarLogado()
+    protected $agency;    
+    
+	protected function verifyUserLogedIn()
     {
     	$user = $this->getUser();
         if ($user == null) {
@@ -20,11 +21,28 @@ abstract class Controlador extends DW3Controlador
         }
     }
 
+	protected function verifyAgencyLogedIn()
+    {
+        $agency = $this->getAgency();
+        if ($agency == null) {
+        	$this->redirecionar(URL_RAIZ);
+        }
+    }
+
     protected function getUser()
     {
         if ($this->user == null) {
-        	$user = DW3Sessao::get('user');
+            $user = User::findById(DW3Sessao::get('user'));
         }
         return $user;
     }
+
+    protected function getAgency()
+    {
+        if ($this->agency == null) {
+            $agency = Agency::findById(DW3Sessao::get('agency'));
+        }
+        return $agency;
+    }
+
 }

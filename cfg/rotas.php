@@ -1,9 +1,9 @@
 <?php
 
-$rotas = [
+$rotas = [ // Página inicial
     '/' => [
         'GET' => '\Controlador\AppControlador#index',
-    ],
+    ], // Usuário (empresas)
     '/user' => [ 
         'GET' => '\Controlador\UserControlador#index',
         'POST' => '\Controlador\UserControlador#create'
@@ -11,18 +11,35 @@ $rotas = [
     '/user/new' => [
         'GET' => '\Controlador\UserControlador#new'
     ],
-    '/user/bidding' => [
-        'GET' => '\Controlador\BinddinsUserControlador#show'
+    '/user/login/new' => [
+        'GET' => '\Controlador\UserLoginControlador#new',
+        'POST' => '\Controlador\UserLoginControlador#session'
     ],
+    '/user/logout' => [
+        'GET' => '\Controlador\UserLoginControlador#destroy',
+    ], // orgãos públicos
     '/agency' => [ 
         'GET' => '\Controlador\AgencyControlador#index',
         'POST' => '\Controlador\AgencyControlador#create'
     ],
     '/agency/new' => [
         'GET' => '\Controlador\AgencyControlador#new'
-    ], 
-    '/user/login/new' => [
-        'GET' => '\Controlador\UserLoginControlador#new',
-        'POST' => '\Controlador\UserLoginControlador#session'
+    ],
+    '/agency/login/new' => [
+        'GET' => '\Controlador\AgencyLoginControlador#new',
+        'POST' => '\Controlador\AgencyLoginControlador#session'        
+    ],
+    '/agency/logout' => [
+        'GET' => '\Controlador\AgencyLoginControlador#destroy'
+    ], // Licitações 
+    '/biddings' => [
+        'GET' => '\Controlador\BinddingsControlador#index'
+    ],
+    '/bidding/new' => [
+        'GET' => '\Controlador\BinddingsControlador#new',
+        'POST' => '\Controlador\BinddingsControlador#create'
+    ],
+    '/bidding/?' => [
+        'GET' => '\Controlador\BinddingsControlador#show'
     ],
 ];

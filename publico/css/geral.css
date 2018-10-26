@@ -3,5 +3,9 @@
 }
 
 body {
-    background-color: white;
+    background-color: grey;
+}
+
+.container{
+    background-color: white;    
 }

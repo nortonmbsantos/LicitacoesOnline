@@ -19,13 +19,13 @@ class UserLoginControlador extends Controlador
             $this->redirecionar(URL_RAIZ);
         } else {
             $this->setErros(['login' => 'Usuário ou senha inválido.']);
-            $this->visao('user/login/new.php');
+            $this->visao('user/login/new.php', ['user' => $user = $this->getUser()]);
         }
     }
 
-    public function destruir()
+    public function destroy()
     {
         DW3Sessao::deletar('user');
-        $this->redirecionar(URL_RAIZ . 'login');
+        $this->redirecionar(URL_RAIZ);
     }
 }

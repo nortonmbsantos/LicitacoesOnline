@@ -27,4 +27,5 @@ class AgencyControlador extends Controlador
             $this->visao('agency/new.php');
         }
     }
+
 }

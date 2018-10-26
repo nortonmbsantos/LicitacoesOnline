@@ -17,3 +17,25 @@ CREATE TABLE public_agencies (
     PRIMARY KEY (id)
 )
 ENGINE = InnoDB;
+
+CREATE TABLE biddings (
+    id INT NOT NULL AUTO_INCREMENT ,
+    title VARCHAR(255) NOT NULL ,
+    description VARCHAR(255) NOT NULL ,
+    institutionId INT NOT NULL ,
+    value DECIMAL NOT NULL ,
+    PRIMARY KEY (id),
+    FOREIGN KEY (institutionId) REFERENCES public_agencies(id)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE user_bid (
+    id INT NOT NULL AUTO_INCREMENT ,
+    biddingId INT NOT NULL ,
+    userId INT NOT NULL ,
+    value DECIMAL NOT NULL ,
+    PRIMARY KEY (id),
+    FOREIGN KEY (userId) REFERENCES users(id),
+    FOREIGN KEY (biddingId) REFERENCES biddings(id)
+)
+ENGINE = InnoDB;
