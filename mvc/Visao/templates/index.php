@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?= URL_CSS . 'bootstrap.css' ?>">
     <link rel="stylesheet" href="<?= URL_CSS . 'geral.css' ?>">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 </head>
 <body>
     <?php include_once('navbar.php') ?>
-    <div class="container mt-5 mb-5">
+    <div class="container pt-5 pb-5 pl-5 pr-5">
 
         <?php $this->imprimirConteudo() ?>
     </div>

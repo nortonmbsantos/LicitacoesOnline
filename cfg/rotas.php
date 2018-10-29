@@ -31,6 +31,9 @@ $rotas = [ // Página inicial
     ],
     '/agency/logout' => [
         'GET' => '\Controlador\AgencyLoginControlador#destroy'
+    ],
+    '/agency/biddings' => [
+        'GET' => '\Controlador\AgencyControlador#biddings'
     ], // Licitações 
     '/biddings' => [
         'GET' => '\Controlador\BinddingsControlador#index'

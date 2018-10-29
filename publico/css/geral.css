@@ -3,9 +3,10 @@
 }
 
 body {
-    background-color: grey;
+    background-color: rgb(218, 216, 216);
 }
 
 .container{
-    background-color: white;    
+    background-color: white;
+    padding-bottom: 100%;   
 }

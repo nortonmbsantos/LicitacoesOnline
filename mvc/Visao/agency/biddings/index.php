@@ -1,0 +1,1 @@
+<a href="<?= URL_RAIZ . 'bidding/new' ?>" class="btn btn-primary">Criar licitação</a>

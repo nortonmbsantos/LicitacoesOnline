@@ -7,12 +7,12 @@ class AgencyControlador extends Controlador
 {
     public function index()
     {
-        $this->visao('agency/index.php', ['user' => $user = $this->getUser()]);
+        $this->visao('agency/index.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency()]);
     }
 
     public function new()
     {
-        $this->visao('agency/new.php', ['user' => $user = $this->getUser()]);
+        $this->visao('agency/new.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency()]);
     }
 
     public function create()
@@ -24,8 +24,13 @@ class AgencyControlador extends Controlador
             $this->redirecionar(URL_RAIZ . 'agency');
         } else {
             $this->setErros($agency->getValidacaoErros());
-            $this->visao('agency/new.php');
+            $this->visao('agency/new.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency()]);
         }
+    }
+
+    public function biddings()
+    {
+        $this->visao('agency/biddings/index.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency()]);
     }
 
 }
