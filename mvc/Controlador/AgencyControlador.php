@@ -2,6 +2,7 @@
 namespace Controlador;
 
 use \Modelo\Agency;
+use \Modelo\Bidding;
 
 class AgencyControlador extends Controlador
 {
@@ -30,7 +31,8 @@ class AgencyControlador extends Controlador
 
     public function biddings()
     {
-        $this->visao('agency/biddings/index.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency()]);
+        $biddings = Bidding::findByAgency($this->getAgency()->getId());
+        $this->visao('agency/biddings/index.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency(), 'biddings' => $biddings]);
     }
 
 }

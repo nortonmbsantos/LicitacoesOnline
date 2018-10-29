@@ -2,6 +2,7 @@
 namespace Controlador;
 
 use \Modelo\Bidding;
+use \Modelo\Agency;
  
 class BinddingsControlador extends Controlador
 {
@@ -28,7 +29,7 @@ class BinddingsControlador extends Controlador
 
         if ($bidding->isValido()) {
             $bidding->save();
-            $this->redirecionar(URL_RAIZ . 'biddings');
+            $this->redirecionar(URL_RAIZ . 'agency/biddings');
         } else {
             $this->setErros($bidding->getValidacaoErros());
             $this->visao('bidding/new.php');

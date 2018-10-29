@@ -20,6 +20,7 @@
   </a>
 </div>
 
+<?php if(!$user && !$agency) { ?>    
 <div class='row mt-5'>
   <div class="card col-sm-4 col-lg-4">
     <img class="card-img-top" src="<?= URL_IMG . 'empresa.png' ?>" alt="Card image cap">
@@ -43,3 +44,6 @@
     </div>
   </div>
 </div>
+<?php } else { ?>
+      <?php include_once("biddings.php") ?>
+<?php } ?>
