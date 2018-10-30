@@ -5,7 +5,7 @@
         <h5 class="card-title"><?= $b->getTitle() ?></h5>
         <h6 class="card-subtitle mb-2 text-muted">Licitação de <?= $b->getInstitutionName() ?></h6>
         <p class="card-text"><?= $b->getDescription() ?></p>
-        <a href="#" class="btn btn-primary">Entrada Rápida</a>
+        <a href="<?= URL_RAIZ . 'bidding/' . $b->getId() ?>" class="btn btn-primary">Visualizar</a>
         <a href="#" class="btn btn-secondary">Visualizar</a>
       </div>
     </div>

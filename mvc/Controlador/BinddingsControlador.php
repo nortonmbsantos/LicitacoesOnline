@@ -12,9 +12,10 @@ class BinddingsControlador extends Controlador
         $this->visao('bidding/index.php', ['user' => $user = $this->getUser()]);
     }
 
-    public function show()
+    public function show($id)
     {
-        $this->visao('bidding/show.php', ['user' => $user = $this->getUser()]);
+        $bidding = Bidding::findById($id);
+        $this->visao('bidding/show.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency(), 'bidding' => $bidding]);
     }
 
     public function new()
