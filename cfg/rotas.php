@@ -36,17 +36,17 @@ $rotas = [ // Página inicial
         'GET' => '\Controlador\AgencyControlador#biddings'
     ], // Licitações 
     '/biddings' => [
-        'GET' => '\Controlador\BinddingsControlador#index'
+        'GET' => '\Controlador\BiddingsControlador#index'
     ],
     '/bidding/new' => [
-        'GET' => '\Controlador\BinddingsControlador#new',
-        'POST' => '\Controlador\BinddingsControlador#create'
+        'GET' => '\Controlador\BiddingsControlador#new',
+        'POST' => '\Controlador\BiddingsControlador#create'
     ],
     '/bidding/?' => [
-        'GET' => '\Controlador\BinddingsControlador#show'
-    ],
+        'GET' => '\Controlador\BiddingsControlador#show'
+    ], // Lance do usuário (empresa)
     '/user/bid' => [
-        'POST' => '\Controlador\BinddingsControlador#bid'
+        'POST' => '\Controlador\UserBidControlador#new'
     ],
 
 ];

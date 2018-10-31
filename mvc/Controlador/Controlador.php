@@ -21,15 +21,6 @@ abstract class Controlador extends DW3Controlador
         }
     }
 
-	protected function verifyLogedIn()
-    {
-        $agency = $this->getAgency();
-    	$user = $this->getUser();
-        if ($user == null && $agency == null) {
-        	$this->redirecionar(URL_RAIZ);
-        }
-    }
-
 	protected function verifyAgencyLogedIn()
     {
         $agency = $this->getAgency();
@@ -38,6 +29,15 @@ abstract class Controlador extends DW3Controlador
         }
     }
 
+    protected function verifyLogedIn()
+    {
+        $agency = $this->getAgency();
+    	$user = $this->getUser();
+        if ($user == null && $agency == null) {
+        	$this->redirecionar(URL_RAIZ);
+        }
+    }
+    
     protected function getUser()
     {
         if ($this->user == null) {

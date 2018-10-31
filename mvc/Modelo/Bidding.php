@@ -5,6 +5,7 @@ use \PDO;
 use \Framework\DW3BancoDeDados;
 use \Modelo\Agency;
 
+
 class Bidding extends Modelo
 {
     const FIND_BY_ID = 'SELECT * FROM biddings WHERE id = ? LIMIT 1';
@@ -16,6 +17,7 @@ class Bidding extends Modelo
     private $title;
     private $institutionId;
     private $description;
+    private $userId;
     private $value;
 
     public function __construct($title, $description, $institutionId, $value = null, $id = null){

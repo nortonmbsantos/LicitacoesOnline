@@ -4,6 +4,7 @@ namespace Modelo;
 use \PDO;
 use \Framework\DW3BancoDeDados;
 use \Modelo\Bidding;
+use \Modelo\User;
 
 class UserBid extends Modelo
 {
@@ -30,6 +31,10 @@ class UserBid extends Modelo
 
     public function getUserId(){
         return $this->userId;
+    }
+
+    public function getUser(){
+        return User::findById($this->userId);
     }
 
     public function getBiddingId(){
