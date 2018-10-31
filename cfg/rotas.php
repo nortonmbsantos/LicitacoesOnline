@@ -45,4 +45,8 @@ $rotas = [ // Página inicial
     '/bidding/?' => [
         'GET' => '\Controlador\BinddingsControlador#show'
     ],
+    '/user/bid' => [
+        'POST' => '\Controlador\BinddingsControlador#bid'
+    ],
+
 ];

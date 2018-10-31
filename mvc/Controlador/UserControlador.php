@@ -3,6 +3,7 @@ namespace Controlador;
 
 use \Framework\DW3Sessao;
 use \Modelo\User;
+use \Modelo\UserBid;
 
 class UserControlador extends Controlador
 {
@@ -27,5 +28,10 @@ class UserControlador extends Controlador
             $this->setErros($user->getValidacaoErros());
             $this->visao('user/new.php');
         }
+    }
+
+    public function bid()
+    {
+        $this->visao('user/new.php', ['user' => $user = $this->getUser()]);
     }
 }
