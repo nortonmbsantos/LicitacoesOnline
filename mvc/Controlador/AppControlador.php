@@ -3,6 +3,7 @@ namespace Controlador;
 
 use \Framework\DW3Sessao;
 use \Modelo\User;
+use \Modelo\Agency;
 use \Modelo\Bidding;
 
 class AppControlador extends Controlador
@@ -10,7 +11,7 @@ class AppControlador extends Controlador
     public function index()
     {
         $biddings = Bidding::findAll();
-        $this->visao('inicial/index.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency(), 'biddings' => $biddings]);
+        $this->visao('inicial/index.php', ['user' => $this->getUser(),  'agency' => $this->getAgency(), 'biddings' => $biddings]);
     }
     
 }

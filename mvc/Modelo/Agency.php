@@ -50,11 +50,14 @@ class Agency extends Modelo
 
     protected function verificarErros()
     {
-        if (strlen($this->email) < 3) {
-            $this->setErroMensagem('email', 'Deve ter no mínimo 3 caracteres.');
+        if (strlen($this->email) < 8) {
+            $this->setErroMensagem('email', 'Deve ter no mínimo 8 caracteres.');
         }
-        if (strlen($this->senhaPlana) < 3) {
-            $this->setErroMensagem('senha', 'Deve ter no mínimo 3 caracteres.');
+        if (strlen($this->agencyName) < 6) {
+            $this->setErroMensagem('agencyname', 'Deve ter no mínimo 6 caracteres.');
+        }
+        if (strlen($this->senhaPlana) < 6) {
+            $this->setErroMensagem('pwd', 'Deve ter no mínimo 6 caracteres.');
         }
     }
 
