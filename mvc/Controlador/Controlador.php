@@ -12,7 +12,7 @@ abstract class Controlador extends DW3Controlador
     
     protected $user;
     protected $agency;    
-    
+
 	protected function verifyUserLogedIn()
     {
     	$user = $this->getUser();

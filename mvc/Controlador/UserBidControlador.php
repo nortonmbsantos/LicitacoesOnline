@@ -9,7 +9,6 @@ class UserBidControlador extends Controlador
 {
     public function new()
     {
-        echo 'ok';
         $bidding = Bidding::findById($_POST['biddingId']);
         $bid = new UserBid($_POST['userId'], $_POST['biddingId'], $_POST['value']);
 
@@ -18,12 +17,23 @@ class UserBidControlador extends Controlador
             $this->redirecionar(URL_RAIZ . 'biddings');
         } else {
             $this->setErros($bid->getValidacaoErros());
-            $this->visao('bidding/show.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency(), 'bidding' => $bidding]);
+            $this->visao('bidding/show.php', ['user' => $this->getUser(),  'agency' => $this->getAgency(), 'bidding' => $bidding]);
         }
     }
 
     public function update(){
-        
+        $userBid = UserBid::findByUserAndBidding($this->getUser()->getId(), $_POST['biddingId']);
+        $bidding = Bidding::findById($_POST['biddingId']);        
+        $bid = new UserBid($_POST['userId'], $_POST['biddingId'], $_POST['value']);
+
+        if ($bid->isValido()) {
+            $bid->update();
+            $this->redirecionar(URL_RAIZ . 'bidding/' . $_POST['biddingId']);
+        } else {
+            $this->setErros($bid->getValidacaoErros());
+            $this->visao('bidding/show.php', 
+            ['user' => $this->getUser(),  'agency' => $this->getAgency(), 'bidding' => $bidding, 'userBid' => $userBid]);
+        }
     }
 
 }

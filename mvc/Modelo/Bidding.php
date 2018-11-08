@@ -2,6 +2,7 @@
 namespace Modelo;
 
 use \PDO;
+use \Framework\DW3ImagemUpload;
 use \Framework\DW3BancoDeDados;
 use \Modelo\Agency;
 
@@ -19,12 +20,14 @@ class Bidding extends Modelo
     private $description;
     private $userId;
     private $value;
+    private $photo;
 
-    public function __construct($title, $description, $institutionId, $value = null, $id = null){
+    public function __construct($title, $description, $institutionId, $photo = null, $value = null, $id = null){
         $this->id = $id;
         $this->title = $title;
         $this->institutionId = $institutionId;
         $this->description = $description;
+        $this->photo = $photo;
         $this->value = $value;
     }
 
@@ -44,6 +47,15 @@ class Bidding extends Modelo
         return $this->institutionId;
     }
 
+    public function getImage()
+    {
+        $imageName = "{$this->id}.png";
+        if (!DW3ImagemUpload::existe($imageName)) {
+            $imageName = 'default-image.png';
+        }
+        return $imageName;
+    }
+
     public function getInstitution(){
         return Agency::findById($this->getInstitutionId());
     }
@@ -59,6 +71,9 @@ class Bidding extends Modelo
     public function save()
     {
         $this->insert();
+        if($this->saveImage()){
+            var_dump("ok");
+        }
     }
 
     private function insert()
@@ -73,6 +88,14 @@ class Bidding extends Modelo
         DW3BancoDeDados::getPdo()->commit();
     }
 
+    private function saveImage()
+    {
+        if (DW3ImagemUpload::isValida($this->photo)) {
+            $path = PASTA_PUBLICO . "img/{$this->id}.png";
+            DW3ImagemUpload::salvar($this->photo, $path);
+        }
+    }
+
     public static function findById($ID)
     {
         $comando = DW3BancoDeDados::prepare(self::FIND_BY_ID);
@@ -85,6 +108,7 @@ class Bidding extends Modelo
                 $registro['title'],
                 $registro['description'],
                 $registro['institutionId'],
+                null,
                 $registro['value'],
                 $registro['id']
             );
@@ -104,6 +128,7 @@ class Bidding extends Modelo
                 $registro['title'],
                 $registro['description'],
                 $registro['institutionId'],
+                null,
                 $registro['value']
             );
         }
@@ -119,6 +144,7 @@ class Bidding extends Modelo
                 $registro['title'],
                 $registro['description'],
                 $registro['institutionId'],
+                null,
                 $registro['value'],
                 $registro['id']
             );

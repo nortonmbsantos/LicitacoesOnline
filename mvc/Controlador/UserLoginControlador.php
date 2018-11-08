@@ -8,7 +8,7 @@ class UserLoginControlador extends Controlador
 {
     public function new()
     {
-        $this->visao('user/login/new.php', ['user' => $user = $this->getUser()]);
+        $this->visao('user/login/new.php', ['user' => $this->getUser(), 'agency' => $this->getAgency()]);
     }
 
     public function session()
@@ -19,7 +19,7 @@ class UserLoginControlador extends Controlador
             $this->redirecionar(URL_RAIZ);
         } else {
             $this->setErros(['login' => 'Usuário ou senha inválido.']);
-            $this->visao('user/login/new.php', ['user' => $user = $this->getUser()]);
+            $this->visao('user/login/new.php', ['user' => $this->getUser(), 'agency' => $this->getAgency()]);
         }
     }
 

@@ -3,8 +3,8 @@
         <h1 class="text-center">Cadastre a sua Licitação!</h1>
 
         <form action="<?= URL_RAIZ . 'bidding/new' ?>" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label class="exampleInputEmail1" for="email">Título *</label>
+            <div class="form-group <?= $this->getErroCss('title') ?>">
+                <label class="exampleInputEmail1" for="title">Título *</label>
                 <?php $this->incluirVisao('shared/formErro.php', ['campo' => 'title']) ?>
                 <input type="text" id="title" name="title" class="form-control" autofocus value="<?= $this->getPost('title') ?>">
             </div>
@@ -15,6 +15,11 @@
             </div>
             <div class="form-group">
                 <input type="hidden" id="institutionId" name="institutionId" class="form-control" autofocus value="<?= $this->getAgency()->getId() ?>">
+            </div>
+            <div class="form-group <?= $this->getErroCss('photo') ?>">
+                <label class="control-label" for="photo">Foto (somente PNG)</label>
+                <?php $this->incluirVisao('shared/formErro.php', ['campo' => 'photo']) ?>
+                <input id="photo" name="photo" class="form-control" type="file">
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="submit" class="btn btn-success center-block">Cadastrar</button>

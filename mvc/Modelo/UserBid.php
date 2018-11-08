@@ -9,7 +9,9 @@ use \Modelo\User;
 class UserBid extends Modelo
 {
     const FIND_BY_ID = 'SELECT * FROM user_bid WHERE id = ? LIMIT 1';
+    const DELETE_BY_ID = 'DELETE FROM user_bid WHERE userId = ? AND biddingId = ?';
     const FIND_BY_BIDDING_ID = 'SELECT * FROM user_bid WHERE biddingId = ?';    
+    const FIND_BY_USER_AND_BIDDING = 'SELECT * FROM user_bid WHERE userId = ? AND biddingId = ?';    
     const FIND_ALL = 'SELECT * FROM user_bid';  
     const INSERT = 'INSERT INTO user_bid(biddingId,userId,value) VALUES (?, ?, ?)';
     
@@ -45,9 +47,22 @@ class UserBid extends Modelo
         return $this->value;
     }
 
+    protected function verificarErros()
+    {
+        if ($this->value <= 0) {
+            $this->setErroMensagem('value', 'Deve ser um número maior do que zero.');
+        }
+    }
+
     public function save()
     {
         $this->insert();
+    }
+
+    public function update()
+    {
+        $this->deleteById($this->userId, $this->biddingId);
+        $this->save();
     }
 
     private function insert()
@@ -79,7 +94,15 @@ class UserBid extends Modelo
         }
         return $objeto;
     }
-
+    
+    public static function deleteById($userId, $biddingId)
+    {
+        $comando = DW3BancoDeDados::prepare(self::DELETE_BY_ID);
+        $comando->bindValue(1, $userId, PDO::PARAM_STR);
+        $comando->bindValue(2, $biddingId, PDO::PARAM_STR);
+        $comando->execute();
+    }
+    
     public static function findByBidding($ID)
     {
         $comando = DW3BancoDeDados::prepare(self::FIND_BY_BIDDING_ID);
@@ -96,6 +119,25 @@ class UserBid extends Modelo
             );
         }
         return $list;
+    }
+
+    public static function findByUserAndBidding($userId, $biddingId)
+    {
+        $comando = DW3BancoDeDados::prepare(self::FIND_BY_USER_AND_BIDDING);
+        $comando->bindValue(1, $userId, PDO::PARAM_STR);
+        $comando->bindValue(2, $biddingId, PDO::PARAM_STR);
+        $comando->execute();
+        $objeto = null;
+        $registro = $comando->fetch();
+        if ($registro) {
+            $objeto = new UserBid(
+                $registro['userId'],
+                $registro['biddingId'],
+                $registro['value'],
+                $registro['id']
+            );
+        }
+        return $objeto;
     }
 
     public static function findAll()

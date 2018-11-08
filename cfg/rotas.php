@@ -48,5 +48,8 @@ $rotas = [ // Página inicial
     '/user/bid/new' => [
         'POST' => '\Controlador\UserBidControlador#new'
     ],
+    '/user/bid/update' => [
+        'POST' => '\Controlador\UserBidControlador#update'
+    ],
 
 ];
