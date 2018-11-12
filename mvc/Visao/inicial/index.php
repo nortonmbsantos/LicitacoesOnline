@@ -1,5 +1,5 @@
+<?php $this->incluirVisao('shared/flashMessage.php') ?>
 <?php include_once("carousel.php") ?>
-
 
 <?php if(!$user && !$agency) { ?>    
 <div class='row mt-5'>

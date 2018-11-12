@@ -1,3 +1,5 @@
+<?php $this->incluirVisao('shared/flashMessage.php') ?>
+
 <?php if($bidding) { ?>
 
 <div class="d-flex justify-content-center">

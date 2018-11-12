@@ -16,10 +16,14 @@ class AgencyLoginControlador extends Controlador
         $agency = Agency::findByEmail($_POST['email']);
         if ($agency && $agency->verifyPwd($_POST['pwd'])) {
             DW3Sessao::set('agency', $agency->getId());
+            DW3Sessao::setFlash('mensagemFlash', 'Login efetuado com sucesso.');            
             $this->redirecionar(URL_RAIZ);
         } else {
             $this->setErros(['login' => 'Usuário ou senha inválido.']);
-            $this->visao('agency/login/new.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency()]);
+            $this->visao('agency/login/new.php', 
+            ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency(),
+            'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
+            ]);
         }
     }
 

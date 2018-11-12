@@ -1,3 +1,5 @@
+<?php $this->incluirVisao('shared/flashMessage.php') ?>
+
 <div class="row">
 <div class="col-12 text-center">
   <h1>Lista de licitações</h1>

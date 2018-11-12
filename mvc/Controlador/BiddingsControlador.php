@@ -26,7 +26,7 @@ class BiddingsControlador extends Controlador
         $pagination = $this->calculatePagination();
         $this->visao('bidding/index.php', ['user' => $this->getUser(),  'agency' => $this->getAgency(),
          'biddings' => $pagination['biddings'], 'page' => $pagination['page'], 
-         'lastPage' => $pagination['lastPage']  
+         'lastPage' => $pagination['lastPage'], 'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
          ]);
     }
 
@@ -61,10 +61,14 @@ class BiddingsControlador extends Controlador
 
         if ($bidding->isValido()) {
             $bidding->save();
+            DW3Sessao::setFlash('mensagemFlash', 'Licitação cadastrada.');
             $this->redirecionar(URL_RAIZ . 'agency/biddings');
         } else {
             $this->setErros($bidding->getValidacaoErros());
-            $this->visao('bidding/new.php', ['user' => $this->getUser(),  'agency' => $this->getAgency()]);
+            $this->visao('bidding/new.php', 
+            ['user' => $this->getUser(),  'agency' => $this->getAgency(),
+            'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
+            ]);
         }
     }
 
