@@ -1,3 +1,6 @@
+<div class="row">
+<div class="col-3"></div>
+<div class="col-6">
 <div class="center-block site">
     <div class="col-sm-offset-3">
         <h1 class="text-center">Login empresarial!</h1>
@@ -13,7 +16,7 @@
                 <label class="control-label" for="pwd">Senha *</label>
                 <input id="pwd" name="pwd" class="form-control" type="password">
             </div>
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <div class="btn-group float-right" role="group" aria-label="Basic example">
                 <button type="submit" class="btn btn-success center-block">Entrar</button>
                 <a href="<?= URL_RAIZ ?>" class="btn btn-danger">Voltar</a>
             </div>

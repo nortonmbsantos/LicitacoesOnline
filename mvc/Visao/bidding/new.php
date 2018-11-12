@@ -1,3 +1,7 @@
+<div class="row">
+<div class="col-3"></div>
+<div class="col-6">
+
 <div class="center-block site">
     <div class="col-sm-offset-3">
         <h1 class="text-center">Cadastre a sua Licitação!</h1>
@@ -11,7 +15,7 @@
             <div class="form-group">
                 <label class="text" for="text">Descrição *</label>
                 <?php $this->incluirVisao('shared/formErro.php', ['campo' => 'description']) ?>
-                <input type="textarea" id="description" name="description" class="form-control" autofocus value="<?= $this->getPost('description') ?>">
+                <textarea id="description" name="description" class="form-control autoExpand area-text" autofocus value="<?= $this->getPost('description') ?>"></textarea>
             </div>
             <div class="form-group">
                 <input type="hidden" id="institutionId" name="institutionId" class="form-control" autofocus value="<?= $this->getAgency()->getId() ?>">
@@ -27,4 +31,6 @@
             </div>
         </form>
     </div>
+</div>
+</div>
 </div>

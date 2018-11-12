@@ -1,8 +1,19 @@
 <?php if($bidding) { ?>
-<img src="<?= URL_IMG . $bidding->getImage() ?>" alt="">
-<h1><?= $bidding->getTitle() ?></h1>
-<h1><?= $bidding->getDescription() ?></h1>
-<h1><?= $bidding->getInstitutionName() ?></h1>
+
+<div class="d-flex justify-content-center">
+    <img src="<?= URL_IMG . $bidding->getImage() ?>" alt="image-profile-bidding" class="image-bidding">
+</div>
+<div class="d-flex justify-content-center">
+    <h1><?= $bidding->getTitle() ?></h1>
+</div>
+<div class="d-flex justify-content-center">
+    <h2><?= $bidding->getDescription() ?></h2>
+</div>
+
+<div class="d-flex justify-content-center">
+    <h4><?= $bidding->getInstitutionName() ?></h4>
+</div>
+
 
 <?php if($agency && $agency->getId() == $bidding->getInstitutionId()) { ?>
     <?php require_once('bidList.php') ?>        

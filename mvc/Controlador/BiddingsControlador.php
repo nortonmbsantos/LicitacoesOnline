@@ -8,11 +8,24 @@ use \Modelo\UserBid;
 class BiddingsControlador extends Controlador
 {
 
+    private function calculatePagination()
+    {
+        $page = array_key_exists('p', $_GET) ? intval($_GET['p']) : 1;
+        $limit = 8;
+        $offset = ($page - 1) * $limit;
+        $biddings = Bidding::findAndPaginate($limit, $offset);
+        $lastPage = ceil(Bidding::countAll() / $limit);
+        return compact('page', 'biddings', 'lastPage');
+    }
+
     public function index()
     {
         $this->verifyLogedIn();
-        $biddings = Bidding::findAll();
-        $this->visao('bidding/index.php', ['user' => $this->getUser(),  'agency' => $this->getAgency(), 'biddings' => $biddings]);
+        $pagination = $this->calculatePagination();
+        $this->visao('bidding/index.php', ['user' => $this->getUser(),  'agency' => $this->getAgency(),
+         'biddings' => $pagination['biddings'], 'page' => $pagination['page'], 
+         'lastPage' => $pagination['lastPage']  
+         ]);
     }
 
     public function show($id)
@@ -20,11 +33,13 @@ class BiddingsControlador extends Controlador
         $this->verifyLogedIn();
         $bidding = Bidding::findById($id);
         $bids = UserBid::findByBidding($id);
-        if($this->user){
+        
+        if($this->getUser()){
             $userBid = UserBid::findByUserAndBidding($this->getUser()->getId(), $id);
-        }else{
+        } else {
             $userBid = null;
         }
+
         $this->visao('bidding/show.php', 
         ['user' => $this->getUser(),  'agency' => $this->getAgency(), 'bidding' => $bidding, 'bids' => $bids, 'userBid' => $userBid]);
     }
@@ -32,7 +47,7 @@ class BiddingsControlador extends Controlador
     public function new()
     {
         $this->verifyAgencyLogedIn();
-        $this->visao('bidding/new.php', ['user' => $this->getUser(),  'agency' => $this->getAgency()]);
+        $this->visao('bidding/new.php', ['user' => $this->getUser(), 'agency' => $this->getAgency()]);
     }
 
     public function create()

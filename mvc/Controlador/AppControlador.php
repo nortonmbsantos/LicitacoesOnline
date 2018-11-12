@@ -10,7 +10,7 @@ class AppControlador extends Controlador
 {
     public function index()
     {
-        $biddings = Bidding::findAll();
+        $biddings = Bidding::findLastSix();
         $this->visao('inicial/index.php', ['user' => $this->getUser(),  'agency' => $this->getAgency(), 'biddings' => $biddings]);
     }
     

@@ -1,3 +1,6 @@
+<div class="row">
+<div class="col-3"></div>
+<div class="col-6">
 <div class="center-block site">
     <div class="col-sm-offset-3">
         <h1 class="text-center">Cadastre sua empresa!</h1>

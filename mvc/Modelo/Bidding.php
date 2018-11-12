@@ -12,6 +12,9 @@ class Bidding extends Modelo
     const FIND_BY_ID = 'SELECT * FROM biddings WHERE id = ? LIMIT 1';
     const FIND_BY_AGENCY_ID = 'SELECT * FROM biddings WHERE institutionId = ?';    
     const FIND_ALL = 'SELECT * FROM biddings';    
+    const FIND_AND_PAGINATE = 'SELECT * FROM biddings ORDER BY id DESC LIMIT ? OFFSET ?';
+    const FIND_LAST_SIX = 'SELECT * FROM biddings ORDER BY id DESC LIMIT 6';    
+    const COUNT_ALL = 'SELECT count(id) FROM biddings';
     const FIND_BIDDING_AGENCY = 'SELECT institutionId FROM biddings WHERE id = ? LIMIT 1';    
     const INSERT = 'INSERT INTO biddings(title,description,institutionId) VALUES (?, ?, ?)';
     private $id;
@@ -116,6 +119,13 @@ class Bidding extends Modelo
         return $objeto;
     }
 
+    public static function countAll()
+    {
+        $registros = DW3BancoDeDados::query(self::COUNT_ALL);
+        $total = $registros->fetch();
+        return intval($total[0]);
+    }
+
     public static function findByAgency($ID)
     {
         $comando = DW3BancoDeDados::prepare(self::FIND_BY_AGENCY_ID);
@@ -135,6 +145,28 @@ class Bidding extends Modelo
         return $list;
     }
 
+    public static function findAndPaginate($limit = 8, $offset = 0)
+    {
+        $comando = DW3BancoDeDados::prepare(self::FIND_AND_PAGINATE);
+        $comando->bindValue(1, $limit, PDO::PARAM_INT);
+        $comando->bindValue(2, $offset, PDO::PARAM_INT);
+        $comando->execute();
+        $list = [];
+        $registros = $comando->fetchAll();     
+        foreach ($registros as $registro) {
+            $list[] = new Bidding(
+                $registro['title'],
+                $registro['description'],
+                $registro['institutionId'],
+                null,
+                $registro['value'],
+                $registro['id']
+            );
+        }
+        return $list;
+    }
+
+
     public static function findAll()
     {
         $registros = DW3BancoDeDados::query(self::FIND_ALL);
@@ -151,4 +183,22 @@ class Bidding extends Modelo
         }
         return $list;
     }
+
+    public static function findLastSix()
+    {
+        $registros = DW3BancoDeDados::query(self::FIND_LAST_SIX);
+        $list = [];
+        foreach ($registros as $registro) {
+            $list[] = new Bidding(
+                $registro['title'],
+                $registro['description'],
+                $registro['institutionId'],
+                null,
+                $registro['value'],
+                $registro['id']
+            );
+        }
+        return $list;
+    }
+    
 }

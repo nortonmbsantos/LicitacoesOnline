@@ -42,3 +42,22 @@ body{
   color: #a94442;
 }
 
+.image-bidding{
+  width: 200px;
+  height: 200px;
+}
+
+textarea{  
+  display: block;
+  box-sizing: padding-box;
+  overflow: hidden;
+
+  border-radius: 6px;
+  box-shadow: 2px 2px 8px rgba(black, .3);
+}
+
+.img-50{
+  width: 100px;
+  height: 100px;
+}
+

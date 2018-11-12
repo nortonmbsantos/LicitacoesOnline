@@ -1,13 +1,21 @@
 <div class="row">
-  <?php foreach($biddings as $b) { ?>
-    <div class="card col-6 mt-3" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title"><?= $b->getTitle() ?></h5>
-        <h6 class="card-subtitle mb-2 text-muted">Licitação de <?= $b->getInstitutionName() ?></h6>
-        <p class="card-text"><?= $b->getDescription() ?></p>
-        <a href="<?= URL_RAIZ . 'bidding/' . $b->getId() ?>" class="btn btn-primary">Visualizar</a>
-        <a href="#" class="btn btn-secondary">Visualizar</a>
-      </div>
+<div class="col-12 text-center">
+  <h1>Lista de licitações</h1>
+</div>
+<div class="col-12">
+  <a href="<?= URL_RAIZ ?>" class="btn btn-danger">Voltar</a>
+</div>
+  <?php $this->incluirVisao('bidding/biddingList.php') ?>
+</div>
+<div class="pb-5 mt-5">
+  <?php if ($page > 1) : ?>
+  <div class="float-left">
+      <a href="<?= URL_RAIZ . 'biddings?p=' . ($page-1) ?>" class="btn btn-danger ">Página anterior</a>
+  </div>
+  <?php endif ?>
+  <?php if ($page < $lastPage) : ?>
+    <div class="float-right">
+      <a href="<?= URL_RAIZ . 'biddings?p=' . ($page+1) ?>" class="btn btn-success">Próxima página</a>
     </div>
-  <?php } ?>
+  <?php endif ?>
 </div>

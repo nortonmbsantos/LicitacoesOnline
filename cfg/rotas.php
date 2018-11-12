@@ -51,5 +51,8 @@ $rotas = [ // Página inicial
     '/user/bid/update' => [
         'POST' => '\Controlador\UserBidControlador#update'
     ],
+    '/user/bid/delete' => [
+        'DELETE' => '\Controlador\UserBidControlador#delete'
+    ],
 
 ];
