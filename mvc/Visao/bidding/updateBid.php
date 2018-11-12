@@ -22,8 +22,11 @@
         </form>
     </div>
 </div>
-    <form action="<?= URL_RAIZ . 'user/bid/delete' ?>" method="DELETE" onsubmit="return confirm('Tem certeza que deseja excluir seu lance? Deixará de participar desta licitação.');">
-        <input type="hidden" id="biddingId" name="biddingId" value="<?= $bidding->getId() ?>">
-        <button type="submit" class="btn btn-danger float-right">Desistir do lance *</button>
+
+    <form action="<?= URL_RAIZ . 'user/bid/delete/' . $userBid->getId() ?>" method="post" onsubmit="return confirm('Tem certeza que deseja excluir seu lance? Deixará de participar desta licitação.');">
+        <input type="hidden" name="_metodo" value="DELETE">
+        <input type="hidden" name="biddingId" value="<?= $bidding->getId() ?>">
+        <button type="submit" class="btn btn-danger float-right">Desistir do lance</button>
     </form>
+
 </div>

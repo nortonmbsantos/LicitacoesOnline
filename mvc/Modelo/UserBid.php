@@ -9,7 +9,7 @@ use \Modelo\User;
 class UserBid extends Modelo
 {
     const FIND_BY_ID = 'SELECT * FROM user_bid WHERE id = ? LIMIT 1';
-    const DELETE_BY_ID = 'DELETE FROM user_bid WHERE userId = ? AND biddingId = ?';
+    const DELETE_BY_ID = 'DELETE FROM user_bid WHERE id = ? LIMIT 1';
     const FIND_BY_BIDDING_ID = 'SELECT * FROM user_bid WHERE biddingId = ?';    
     const FIND_BY_USER_AND_BIDDING = 'SELECT * FROM user_bid WHERE userId = ? AND biddingId = ?';    
     const FIND_ALL = 'SELECT * FROM user_bid';  
@@ -61,7 +61,7 @@ class UserBid extends Modelo
 
     public function delete()
     {
-        $this->deleteById($this->userId, $this->biddingId);
+        $this->deleteById($this->id);
     }
 
 
@@ -101,11 +101,10 @@ class UserBid extends Modelo
         return $objeto;
     }
     
-    public static function deleteById($userId, $biddingId)
+    public static function deleteById($id)
     {
         $comando = DW3BancoDeDados::prepare(self::DELETE_BY_ID);
-        $comando->bindValue(1, $userId, PDO::PARAM_STR);
-        $comando->bindValue(2, $biddingId, PDO::PARAM_STR);
+        $comando->bindValue(1, $id, PDO::PARAM_STR);
         $comando->execute();
     }
     

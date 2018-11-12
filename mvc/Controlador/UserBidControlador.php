@@ -38,10 +38,8 @@ class UserBidControlador extends Controlador
 
     public function delete($id){
         $this->verifyUserLogedIn();
-        var_dump("ola");
-        $userBid = UserBid::findByUserAndBidding($this->getUser()->getId(), $_GET['biddingId']);
-        $userBid->delete();
-        // $this->redirecionar(URL_RAIZ . 'bidding/' . $_POST['biddingId']);
+        UserBid::deleteById($id);
+        $this->redirecionar(URL_RAIZ . 'bidding/' . $_POST['biddingId']);
     }
 
 }
