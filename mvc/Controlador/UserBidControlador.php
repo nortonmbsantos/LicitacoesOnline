@@ -34,19 +34,23 @@ class UserBidControlador extends Controlador
         $bid = new UserBid($_POST['userId'], $_POST['biddingId'], $_POST['value']);
 
         if ($bid->isValido()) {
-            $bid->update();
+            $bid->update($userBid->getId());
+            DW3Sessao::setFlash('mensagemFlash', 'Lance atualizado.');
             $this->redirecionar(URL_RAIZ . 'bidding/' . $_POST['biddingId']);
         } else {
             $this->setErros($bid->getValidacaoErros());
+            DW3Sessao::setFlash('mensagemFlash', 'Lance não pode ser atualizado.');
             $this->visao('bidding/show.php', 
             ['user' => $this->getUser(),  'agency' => $this->getAgency(),
-             'bidding' => $bidding, 'userBid' => $userBid]);
+             'bidding' => $bidding, 'userBid' => $userBid,
+             'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')]);
         }
     }
 
     public function delete($id){
         $this->verifyUserLogedIn();
         UserBid::deleteById($id);
+        DW3Sessao::setFlash('mensagemFlash', 'Lance excluído.');
         $this->redirecionar(URL_RAIZ . 'bidding/' . $_POST['biddingId']);
     }
 

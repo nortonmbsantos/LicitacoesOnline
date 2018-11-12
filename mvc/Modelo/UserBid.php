@@ -65,9 +65,9 @@ class UserBid extends Modelo
     }
 
 
-    public function update()
+    public function update($id)
     {
-        $this->deleteById($this->userId, $this->biddingId);
+        $this->deleteById($id);
         $this->save();
     }
 
