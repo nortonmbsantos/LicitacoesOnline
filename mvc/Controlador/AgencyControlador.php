@@ -6,6 +6,17 @@ use \Modelo\Bidding;
 
 class AgencyControlador extends Controlador
 {
+
+    private function calculatePagination()
+    {
+        $page = array_key_exists('p', $_GET) ? intval($_GET['p']) : 1;
+        $limit = 8;
+        $offset = ($page - 1) * $limit;
+        $biddings = Bidding::findAndPaginate($limit, $offset);
+        $lastPage = ceil(Bidding::countAll() / $limit);
+        return compact('page', 'biddings', 'lastPage');
+    }
+
     public function index()
     {
         $this->visao('agency/index.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency()]);
@@ -31,8 +42,12 @@ class AgencyControlador extends Controlador
 
     public function biddings()
     {
+        $pagination = $this->calculatePagination();     
         $biddings = Bidding::findByAgency($this->getAgency()->getId());
-        $this->visao('agency/biddings/index.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency(), 'biddings' => $biddings]);
+        $this->visao('agency/biddings/index.php', ['user' => $this->getUser(),  'agency' => $this->getAgency(),
+        'biddings' => $pagination['biddings'], 'page' => $pagination['page'], 
+        'lastPage' => $pagination['lastPage']  
+        ]);
     }
 
 }
