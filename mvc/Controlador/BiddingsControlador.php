@@ -4,6 +4,8 @@ namespace Controlador;
 use \Modelo\Bidding;
 use \Modelo\Agency;
 use \Modelo\UserBid;
+use \Framework\DW3Sessao;
+
 
 class BiddingsControlador extends Controlador
 {
@@ -41,7 +43,9 @@ class BiddingsControlador extends Controlador
         }
 
         $this->visao('bidding/show.php', 
-        ['user' => $this->getUser(),  'agency' => $this->getAgency(), 'bidding' => $bidding, 'bids' => $bids, 'userBid' => $userBid]);
+        ['user' => $this->getUser(),  'agency' => $this->getAgency(), 
+        'bidding' => $bidding, 'bids' => $bids, 
+        'userBid' => $userBid, 'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')]);
     }
 
     public function new()
