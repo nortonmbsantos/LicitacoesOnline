@@ -72,4 +72,12 @@ class BiddingsControlador extends Controlador
         }
     }
 
+    public function close()
+    {
+        $userBid = UserBid::closeBidding();
+        $ID = $_POST['id'];
+        Bidding::closeBidding($userBid->getValue(), $userBid->getId(), $ID);
+        
+    
+    }
 }

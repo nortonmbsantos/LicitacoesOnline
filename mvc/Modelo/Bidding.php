@@ -17,6 +17,7 @@ class Bidding extends Modelo
     const COUNT_ALL = 'SELECT count(id) FROM biddings';
     const FIND_BIDDING_AGENCY = 'SELECT institutionId FROM biddings WHERE id = ? LIMIT 1';    
     const INSERT = 'INSERT INTO biddings(title,description,institutionId) VALUES (?, ?, ?)';
+    const CLOSE_BIDDING = 'UPDATE biddings SET value = ?, userId = ? WHERE id = ?;';
     private $id;
     private $title;
     private $institutionId;
@@ -69,6 +70,10 @@ class Bidding extends Modelo
 
     public function getValue(){
         return $this->value;
+    }
+    
+    public function getUserId(){
+        return $this->userId;
     }
 
     public function save()
@@ -199,6 +204,15 @@ class Bidding extends Modelo
             );
         }
         return $list;
+    }
+
+    public static function closeBidding($value, $userId, $ID)
+    {
+        $comando = DW3BancoDeDados::prepare(self::CLOSE_BIDDING);
+        $comando->bindValue(1, $value, PDO::PARAM_STR);
+        $comando->bindValue(1, $userId, PDO::PARAM_STR);
+        $comando->bindValue(1, $ID, PDO::PARAM_STR);
+        $comando->execute();
     }
     
 }

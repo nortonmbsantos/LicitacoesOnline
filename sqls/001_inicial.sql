@@ -23,7 +23,8 @@ CREATE TABLE biddings (
     title VARCHAR(255) NOT NULL ,
     description VARCHAR(255) NOT NULL ,
     institutionId INT NOT NULL ,
-    value DECIMAL NOT NULL ,
+    value DECIMAL ,
+    userId INT ,
     PRIMARY KEY (id),
     FOREIGN KEY (institutionId) REFERENCES public_agencies(id)
 )
