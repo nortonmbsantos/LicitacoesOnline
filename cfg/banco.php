@@ -6,5 +6,5 @@ $banco = [
     'porta' => '3306',
     'banco' => 'projetoDw3',
     'usuario' => 'root',
-    'senha' => '',
+    'senha' => 'utfpr',
 ];
