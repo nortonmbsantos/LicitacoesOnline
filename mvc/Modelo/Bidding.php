@@ -144,7 +144,8 @@ class Bidding extends Modelo
                 $registro['description'],
                 $registro['institutionId'],
                 null,
-                $registro['value']
+                $registro['value'],
+                $registro['id']
             );
         }
         return $list;
