@@ -3,7 +3,7 @@
 
 <?php if(!$user && !$agency) { ?>    
 <div class='row mt-5'>
-  <div class="card col-sm-4 col-lg-4">
+  <div class="card col-sm-12 col-lg-4">
     <img class="card-img-top" src="<?= URL_IMG . 'empresa.png' ?>" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">Sou uma empresa</h5>
@@ -15,7 +15,7 @@
 
   <div class="col-lg-4"></div>
 
-  <div class="card col-sm-4 col-lg-4">
+  <div class="card col-sm-12 col-lg-4">
     <a href="<?= URL_RAIZ . 'agency/new' ?>"><img class="card-img-top" src="<?= URL_IMG . 'orgao_publicot.png' ?>" alt="Card image cap"></a>
     <div class="card-body">
       <h5 class="card-title">Sou um Orgão Público</h5>
