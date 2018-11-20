@@ -12,7 +12,7 @@ class TesteRaiz extends Teste
     }
 
     public function testeAgencyCard(){
-	$resposta = $this->get(URL_RAIZ);
+	    $resposta = $this->get(URL_RAIZ);
         $this->verificar(strpos($resposta['html'], 'Sou um Orgão Público') !== false);
         $this->verificar(strpos($resposta['html'], 'Cadastre-se') !== false);
         $this->verificar(strpos($resposta['html'], 'Login') !== false);

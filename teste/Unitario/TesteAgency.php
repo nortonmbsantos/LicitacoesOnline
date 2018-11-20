@@ -26,6 +26,13 @@ class TesteAgency extends Teste
         $this->verificar($agency !== false);
     }
 
+    public function testeFindById()
+    {
+        $agency = new Agency('email@teste.com', 'senha', 'teste');
+        $agency->save();
+        $agency = Agency::findById($agency->getId());
+        $this->verificar($agency !== false);
+    }
 
 }
 

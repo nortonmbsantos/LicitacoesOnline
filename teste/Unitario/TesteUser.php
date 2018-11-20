@@ -9,8 +9,6 @@ use \Framework\DW3Carregador;
 class TesteUser extends Teste
 {
 
-    private $userId;
-
     public function testeInsert(){
         $user = new User('email@teste.com', 'senha', 'teste');
         $user->save();
@@ -28,6 +26,12 @@ class TesteUser extends Teste
         $this->verificar($user !== false);
     }
 
-
+    public function testeFindById()
+    {
+        $user = new User('email@teste.com', 'senha', 'teste');
+        $user->save();
+        $user = User::findById($user->getId());
+        $this->verificar($user !== false);
+    }
 }
 
