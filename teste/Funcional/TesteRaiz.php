@@ -5,11 +5,6 @@ use \Teste\Teste;
 
 class TesteRaiz extends Teste
 {
-    public function testeAcessar()
-    {
-        $resposta = $this->get(URL_RAIZ);
-        $this->verificar(strpos($resposta['html'], 'Licitações Online') !== false);
-    }
 
     public function testeAgencyCard(){
 	    $resposta = $this->get(URL_RAIZ);
