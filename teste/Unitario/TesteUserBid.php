@@ -51,8 +51,16 @@ class TesteUserBid extends Teste
         $userBid = new UserBid($this->userId, $this->biddingId, 156);
         $userBid->save();
         $list = UserBid::findByBidding($this->biddingId);
-
         $this->verificar($list[0]->getValue() === (string)156);
     }
+
+    public function testeFindByUserAndBidding(){
+        $userBid = new UserBid($this->userId, $this->biddingId, 156);
+        $userBid->save();
+        $bid = UserBid::findByUserAndBidding($this->userId, $this->biddingId);
+        $this->verificar($bid->getId() === $userBid->getId());
+    }
+
+    
 
 }
