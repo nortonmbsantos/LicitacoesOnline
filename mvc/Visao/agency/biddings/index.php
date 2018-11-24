@@ -1,5 +1,6 @@
 <div class="row">
-  <h1 class="text-center mt-5 col-12">Últimos cadastrados</h1>
+  <a href="<?= URL_RAIZ . 'bidding/new' ?>" class="btn btn-primary">Criar licitação</a>
+  <h1 class="text-center mt-5 col-12">Minhas licitações</h1>
   <?php $this->incluirVisao('bidding/biddingList.php') ?>
 </div>
 <div class="pb-5 mt-5">
