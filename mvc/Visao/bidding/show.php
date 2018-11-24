@@ -16,9 +16,6 @@
         <h4><?= $bidding->getInstitutionName() ?></h4>
     </div>
 
-<?php var_dump($bidding->getClosed()) ?>
-<?php var_dump($bidding->getValue()) ?>
-
     <?php if(!$bidding->getClosed()) { ?>
         <?php if($agency && $agency->getId() == $bidding->getInstitutionId()) { ?>
             <?php require_once('bidList.php') ?>
