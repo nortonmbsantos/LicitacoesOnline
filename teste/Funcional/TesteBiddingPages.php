@@ -47,4 +47,11 @@ class TesteBiddingPages extends Teste
         $this->get(URL_RAIZ . 'agency/logout');
     }
 
+    public function testeNewPage(){
+        $resposta = $this->get(URL_RAIZ . 'bidding/new');
+        $this->verificar(strpos($resposta['html'], 'Título *') !== false);
+        $this->verificar(strpos($resposta['html'], 'Descrição *') !== false);
+        $this->verificar(strpos($resposta['html'], 'Foto (somente PNG)') !== false);
+    }
+
 }
