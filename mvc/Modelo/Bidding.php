@@ -5,6 +5,7 @@ use \PDO;
 use \Framework\DW3ImagemUpload;
 use \Framework\DW3BancoDeDados;
 use \Modelo\Agency;
+use \Modelo\User;
 
 
 class Bidding extends Modelo
@@ -26,13 +27,14 @@ class Bidding extends Modelo
     private $value;
     private $photo;
 
-    public function __construct($title, $description, $institutionId, $photo = null, $value = null, $id = null){
+    public function __construct($title, $description, $institutionId, $photo = null, $value = null, $userId = null, $id = null){
         $this->id = $id;
         $this->title = $title;
         $this->institutionId = $institutionId;
         $this->description = $description;
         $this->photo = $photo;
         $this->value = $value;
+        $this->userId = $userId;
     }
 
     public function getId(){
@@ -49,6 +51,24 @@ class Bidding extends Modelo
 
     public function getInstitutionId(){
         return $this->institutionId;
+    }
+
+    public function getUserId(){
+        return $this->userId;
+    }
+
+    public function getClosed(){
+        if($this->value == null && $this->userId == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public function getWinner(){
+        if($this->getClosed()){
+            return User::findById($this->userId);
+        }
     }
 
     public function getImage()
@@ -70,10 +90,6 @@ class Bidding extends Modelo
 
     public function getValue(){
         return $this->value;
-    }
-    
-    public function getUserId(){
-        return $this->userId;
     }
 
     public function save()
@@ -118,6 +134,7 @@ class Bidding extends Modelo
                 $registro['institutionId'],
                 null,
                 $registro['value'],
+                $registro['userId'],
                 $registro['id']
             );
         }
@@ -145,6 +162,7 @@ class Bidding extends Modelo
                 $registro['institutionId'],
                 null,
                 $registro['value'],
+                $registro['userId'],
                 $registro['id']
             );
         }
@@ -166,6 +184,7 @@ class Bidding extends Modelo
                 $registro['institutionId'],
                 null,
                 $registro['value'],
+                $registro['userId'],
                 $registro['id']
             );
         }
@@ -184,6 +203,7 @@ class Bidding extends Modelo
                 $registro['institutionId'],
                 null,
                 $registro['value'],
+                $registro['userId'],
                 $registro['id']
             );
         }
@@ -201,6 +221,7 @@ class Bidding extends Modelo
                 $registro['institutionId'],
                 null,
                 $registro['value'],
+                $registro['userId'],
                 $registro['id']
             );
         }
@@ -211,8 +232,8 @@ class Bidding extends Modelo
     {
         $comando = DW3BancoDeDados::prepare(self::CLOSE_BIDDING);
         $comando->bindValue(1, $value, PDO::PARAM_STR);
-        $comando->bindValue(1, $userId, PDO::PARAM_STR);
-        $comando->bindValue(1, $ID, PDO::PARAM_STR);
+        $comando->bindValue(2, $userId, PDO::PARAM_STR);
+        $comando->bindValue(3, $ID, PDO::PARAM_STR);
         $comando->execute();
     }
     

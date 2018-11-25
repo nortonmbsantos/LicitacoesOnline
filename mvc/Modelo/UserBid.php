@@ -12,7 +12,7 @@ class UserBid extends Modelo
     const DELETE_BY_ID = 'DELETE FROM user_bid WHERE id = ? LIMIT 1';
     const FIND_BY_BIDDING_ID = 'SELECT * FROM user_bid WHERE biddingId = ?';    
     const FIND_BY_USER_AND_BIDDING = 'SELECT * FROM user_bid WHERE userId = ? AND biddingId = ?';
-    const FIND_BEST_BID = 'SELECT userId, MIN(value) FROM user_bid';    
+    const FIND_BEST_BID = 'SELECT userId, MIN(value) AS value, biddingId, id FROM `user_bid` WHERE biddingId = ? LIMIT 1';    
     const FIND_ALL = 'SELECT * FROM user_bid';  
     const INSERT = 'INSERT INTO user_bid(biddingId,userId,value) VALUES (?, ?, ?)';
     
@@ -162,9 +162,11 @@ class UserBid extends Modelo
     }
 
 
-    public static function closeBidding()
+//pesquisa não esta retornando um objeto real, apenas alguns dados soltos;
+    public static function findBiddingToClose($ID)
     {
         $comando = DW3BancoDeDados::prepare(self::FIND_BEST_BID);
+        $comando->bindValue(1, $ID, PDO::PARAM_STR);
         $comando->execute();
         $objeto = null;
         $registro = $comando->fetch();

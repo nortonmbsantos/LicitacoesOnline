@@ -72,12 +72,10 @@ class BiddingsControlador extends Controlador
         }
     }
 
-    public function close()
+    public function close($ID)
     {
-        $userBid = UserBid::closeBidding();
-        $ID = $_POST['id'];
+        $userBid = UserBid::findBiddingToClose($ID);   
         Bidding::closeBidding($userBid->getValue(), $userBid->getId(), $ID);
-        
-    
+        $this->redirecionar(URL_RAIZ . 'agency/biddings');
     }
 }
