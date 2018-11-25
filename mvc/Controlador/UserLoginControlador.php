@@ -16,6 +16,7 @@ class UserLoginControlador extends Controlador
         $user = User::findByEmail($_POST['email']);
         if ($user && $user->verifyPwd($_POST['pwd'])) {
             DW3Sessao::set('user', $user->getId());
+            DW3Sessao::setFlash('mensagemFlash', 'Login efetuado com sucesso.');
             $this->redirecionar(URL_RAIZ);
         } else {
             $this->setErros(['login' => 'Usuário ou senha inválido.']);
@@ -26,6 +27,7 @@ class UserLoginControlador extends Controlador
     public function destroy()
     {
         DW3Sessao::deletar('user');
+        DW3Sessao::setFlash('mensagemFlash', 'Logout efetuado com sucesso.');
         $this->redirecionar(URL_RAIZ);
     }
 }

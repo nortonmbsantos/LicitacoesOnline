@@ -30,6 +30,7 @@ class AgencyLoginControlador extends Controlador
     public function destroy()
     {
         DW3Sessao::deletar('agency');
+        DW3Sessao::setFlash('mensagemFlash', 'Logout efetuado com sucesso.');
         $this->redirecionar(URL_RAIZ);
     }
 }
