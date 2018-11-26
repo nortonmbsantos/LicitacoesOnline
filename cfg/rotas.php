@@ -47,7 +47,11 @@ $rotas = [ // Página inicial
     ],
     '/bidding/close/?' => [
         'GET' => '\Controlador\BiddingsControlador#close'
-    ], // Lance do usuário (empresa)
+    ], 
+    '/bidding/filter' => [
+        'POST' =>  '\Controlador\BiddingsControlador#filter'
+    ],
+    // Lance do usuário (empresa)
     '/user/bid/new' => [
         'POST' => '\Controlador\UserBidControlador#new'
     ],

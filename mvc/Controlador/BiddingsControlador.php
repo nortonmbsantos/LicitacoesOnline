@@ -20,6 +20,15 @@ class BiddingsControlador extends Controlador
         return compact('page', 'biddings', 'lastPage');
     }
 
+    private function indexPagination($biddings)
+    {
+        $page = array_key_exists('p', $_GET) ? intval($_GET['p']) : 1;
+        $limit = 8;
+        $offset = ($page - 1) * $limit;
+        $lastPage = ceil(Bidding::countAll() / $limit);
+        return compact('page', 'biddings', 'lastPage');
+    }
+
     public function index()
     {
         $this->verifyLogedIn();
@@ -77,5 +86,16 @@ class BiddingsControlador extends Controlador
         $userBid = UserBid::findBiddingToClose($ID);   
         Bidding::closeBidding($userBid->getValue(), $userBid->getId(), $ID);
         $this->redirecionar(URL_RAIZ . 'agency/biddings');
+    }
+
+    public function filter(){
+        $this->verifyLogedIn();
+        $filter = $_POST['biddingFilter'];
+        $biddings = Bidding::filterBidding($filter);
+        $pagination = $this->indexPagination($biddings);
+        $this->visao('bidding/index.php', ['user' => $this->getUser(),  'agency' => $this->getAgency(),
+         'biddings' => $pagination['biddings'], 'page' => $pagination['page'], 
+         'lastPage' => $pagination['lastPage'], 'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
+         ]); 
     }
 }

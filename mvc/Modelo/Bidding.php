@@ -12,7 +12,9 @@ class Bidding extends Modelo
 {
     const FIND_BY_ID = 'SELECT * FROM biddings WHERE id = ? LIMIT 1';
     const FIND_BY_AGENCY_ID = 'SELECT * FROM biddings WHERE institutionId = ?';    
-    const FIND_ALL = 'SELECT * FROM biddings';    
+    const FIND_ALL = 'SELECT * FROM biddings';
+    const FIND_ALL_CLOSED = 'SELECT * FROM biddings WHERE value IS NOT NULL';
+    const FIND_ALL_OPEN = 'SELECT * FROM biddings WHERE value IS NULL';
     const FIND_AND_PAGINATE = 'SELECT * FROM biddings ORDER BY id DESC LIMIT ? OFFSET ?';
     const FIND_LAST_SIX = 'SELECT * FROM biddings ORDER BY id DESC LIMIT 6';    
     const COUNT_ALL = 'SELECT count(id) FROM biddings';
@@ -237,4 +239,27 @@ class Bidding extends Modelo
         $comando->execute();
     }
     
+    public static function filterBidding($filter){
+        if ($filter == 'open') {
+            $registros = DW3BancoDeDados::query(self::FIND_ALL_OPEN);
+        } elseif ($filter == 'closed') {
+            $registros = DW3BancoDeDados::query(self::FIND_ALL_CLOSED);
+        } else {
+            $registros = DW3BancoDeDados::query(self::FIND_ALL);            
+        }
+        $list = [];
+        foreach ($registros as $registro) {
+            $list[] = new Bidding(
+                $registro['title'],
+                $registro['description'],
+                $registro['institutionId'],
+                null,
+                $registro['value'],
+                $registro['userId'],
+                $registro['id']
+            );
+        }
+        return $list;
+    }
+
 }
