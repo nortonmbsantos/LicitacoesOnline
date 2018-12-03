@@ -12,7 +12,7 @@
                 <?php $this->incluirVisao('shared/formErro.php', ['campo' => 'title']) ?>
                 <input type="text" id="title" name="title" class="form-control" autofocus value="<?= $this->getPost('title') ?>">
             </div>
-            <div class="form-group">
+            <div class="form-group <?= $this->getErroCss('description') ?>">
                 <label class="text" for="text">Descrição *</label>
                 <?php $this->incluirVisao('shared/formErro.php', ['campo' => 'description']) ?>
                 <textarea id="description" name="description" class="form-control autoExpand area-text" autofocus value="<?= $this->getPost('description') ?>"></textarea>

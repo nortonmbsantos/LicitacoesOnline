@@ -59,7 +59,17 @@ class Bidding extends Modelo
         return $this->userId;
     }
 
-    public function getClosed(){
+    protected function verificarErros()
+    {
+        if (strlen($this->title) < 8) {
+            $this->setErroMensagem('title', 'Deve ter no mínimo 8 caracteres.');
+        }
+        if (strlen($this->description) < 10) {
+            $this->setErroMensagem('description', 'Deve ter no mínimo 10 caracteres.');
+        }
+    }
+
+    public function isClosed(){
         if($this->value == null && $this->userId == null){
             return false;
         }else{
@@ -68,7 +78,7 @@ class Bidding extends Modelo
     }
 
     public function getWinner(){
-        if($this->getClosed()){
+        if($this->isClosed()){
             return User::findById($this->userId);
         }
     }
@@ -98,7 +108,6 @@ class Bidding extends Modelo
     {
         $this->insert();
         if($this->saveImage()){
-            var_dump("ok");
         }
     }
 

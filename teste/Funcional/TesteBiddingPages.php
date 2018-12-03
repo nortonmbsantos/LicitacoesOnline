@@ -54,4 +54,6 @@ class TesteBiddingPages extends Teste
         $this->verificar(strpos($resposta['html'], 'Foto (somente PNG)') !== false);
     }
 
+    //teste de fechar licitação
+
 }

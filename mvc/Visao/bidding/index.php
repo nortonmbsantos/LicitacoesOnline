@@ -15,7 +15,7 @@
         <select id="biddingFilter" name="biddingFilter" class="form-control" autofocus>
         	<option value="all">Todas as licitações</option>
         	<option value="open">Somente abertas</option>
-        	<option value="closed">Somento fechadas</option>        
+        	<option value="closed">Somente fechadas</option>        
         </select>
     </div>
     <button type="submit" class="btn btn-primary center-block largura100">Filtrar</button>
