@@ -25,6 +25,7 @@ CREATE TABLE biddings (
     institutionId INT NOT NULL ,
     value DECIMAL ,
     userId INT ,
+    closed boolean,
     PRIMARY KEY (id),
     FOREIGN KEY (institutionId) REFERENCES public_agencies(id)
 )

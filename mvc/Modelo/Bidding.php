@@ -13,14 +13,14 @@ class Bidding extends Modelo
     const FIND_BY_ID = 'SELECT * FROM biddings WHERE id = ? LIMIT 1';
     const FIND_BY_AGENCY_ID = 'SELECT * FROM biddings WHERE institutionId = ?';    
     const FIND_ALL = 'SELECT * FROM biddings';
-    const FIND_ALL_CLOSED = 'SELECT * FROM biddings WHERE value IS NOT NULL';
-    const FIND_ALL_OPEN = 'SELECT * FROM biddings WHERE value IS NULL';
+    const FIND_ALL_CLOSED = 'SELECT * FROM biddings WHERE closed = 1';
+    const FIND_ALL_OPEN = 'SELECT * FROM biddings WHERE closed = 0';
     const FIND_AND_PAGINATE = 'SELECT * FROM biddings ORDER BY id DESC LIMIT ? OFFSET ?';
     const FIND_LAST_SIX = 'SELECT * FROM biddings ORDER BY id DESC LIMIT 6';    
     const COUNT_ALL = 'SELECT count(id) FROM biddings';
     const FIND_BIDDING_AGENCY = 'SELECT institutionId FROM biddings WHERE id = ? LIMIT 1';    
-    const INSERT = 'INSERT INTO biddings(title,description,institutionId) VALUES (?, ?, ?)';
-    const CLOSE_BIDDING = 'UPDATE biddings SET value = ?, userId = ? WHERE id = ?;';
+    const INSERT = 'INSERT INTO biddings(title,description,institutionId,closed) VALUES (?, ?, ?,0)';
+    const CLOSE_BIDDING = 'UPDATE biddings SET value = ?, userId = ?, closed = true WHERE id = ?;';
     private $id;
     private $title;
     private $institutionId;
@@ -28,14 +28,16 @@ class Bidding extends Modelo
     private $userId;
     private $value;
     private $photo;
+    private $closed;
 
-    public function __construct($title, $description, $institutionId, $photo = null, $value = null, $userId = null, $id = null){
+    public function __construct($title, $description, $institutionId, $photo = null, $value = null, $userId = null, $closed = false, $id = null){
         $this->id = $id;
         $this->title = $title;
         $this->institutionId = $institutionId;
         $this->description = $description;
         $this->photo = $photo;
         $this->value = $value;
+        $this->closed = $closed;
         $this->userId = $userId;
     }
 
@@ -70,11 +72,7 @@ class Bidding extends Modelo
     }
 
     public function isClosed(){
-        if($this->value == null && $this->userId == null){
-            return false;
-        }else{
-            return true;
-        }
+        return $this->closed;
     }
 
     public function getWinner(){
@@ -146,6 +144,7 @@ class Bidding extends Modelo
                 null,
                 $registro['value'],
                 $registro['userId'],
+                $registro['closed'],
                 $registro['id']
             );
         }
@@ -174,6 +173,7 @@ class Bidding extends Modelo
                 null,
                 $registro['value'],
                 $registro['userId'],
+                $registro['closed'],
                 $registro['id']
             );
         }
@@ -196,6 +196,7 @@ class Bidding extends Modelo
                 null,
                 $registro['value'],
                 $registro['userId'],
+                $registro['closed'],
                 $registro['id']
             );
         }
@@ -215,6 +216,7 @@ class Bidding extends Modelo
                 null,
                 $registro['value'],
                 $registro['userId'],
+                $registro['closed'],
                 $registro['id']
             );
         }
@@ -233,6 +235,7 @@ class Bidding extends Modelo
                 null,
                 $registro['value'],
                 $registro['userId'],
+                $registro['closed'],
                 $registro['id']
             );
         }
@@ -265,6 +268,7 @@ class Bidding extends Modelo
                 null,
                 $registro['value'],
                 $registro['userId'],
+                $registro['closed'],
                 $registro['id']
             );
         }
