@@ -86,7 +86,8 @@ class BiddingsControlador extends Controlador
     {
         $userBid = UserBid::findBiddingToClose($ID);   
         Bidding::closeBidding($userBid->getValue(), $userBid->getId(), $ID);
-        $this->redirecionar(URL_RAIZ . 'agency/biddings');
+        DW3Sessao::setFlash('mensagemFlash', 'Licitação fechada com sucesso.');
+        $this->redirecionar(URL_RAIZ . 'bidding/' . $ID);
     }
 
     public function filter(){
