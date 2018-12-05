@@ -35,7 +35,7 @@ CREATE TABLE user_bid (
     id INT NOT NULL AUTO_INCREMENT ,
     biddingId INT NOT NULL ,
     userId INT NOT NULL ,
-    value DECIMAL NOT NULL ,
+    value DECIMAL(8,2) NOT NULL ,
     PRIMARY KEY (id),
     FOREIGN KEY (userId) REFERENCES users(id),
     FOREIGN KEY (biddingId) REFERENCES biddings(id)
