@@ -11,6 +11,7 @@ class UserBidControlador extends Controlador
 {
     public function new()
     {
+        $this->verifyUserLogedIn();
         $bidding = Bidding::findById($_POST['biddingId']);
         $bid = new UserBid($_POST['userId'], $_POST['biddingId'], $_POST['value']);
 
@@ -23,12 +24,13 @@ class UserBidControlador extends Controlador
             DW3Sessao::setFlash('mensagemFlash', 'Lance não pode ser cadastrado.');
             $this->visao('bidding/show.php', 
             ['user' => $this->getUser(), 'agency' => $this->getAgency(),
-             'bidding' => $bidding, 
+             'bidding' => $bidding, 'userBid' => false,
              'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')]);
         }
     }
 
     public function update(){
+        $this->verifyUserLogedIn();
         $userBid = UserBid::findByUserAndBidding($this->getUser()->getId(), $_POST['biddingId']);
         $bidding = Bidding::findById($_POST['biddingId']);        
         $bid = new UserBid($_POST['userId'], $_POST['biddingId'], $_POST['value']);

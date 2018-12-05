@@ -251,15 +251,19 @@ class Bidding extends Modelo
         $comando->execute();
     }
     
-    public static function filterBidding($filter){
+    public static function filterBidding($filter, $limit = 8, $offset = 0){
         if ($filter == 'open') {
-            $registros = DW3BancoDeDados::query(self::FIND_ALL_OPEN);
+            $comando = DW3BancoDeDados::prepare(self::FIND_ALL_OPEN);
         } elseif ($filter == 'closed') {
-            $registros = DW3BancoDeDados::query(self::FIND_ALL_CLOSED);
+            $comando = DW3BancoDeDados::prepare(self::FIND_ALL_CLOSED);
         } else {
-            $registros = DW3BancoDeDados::query(self::FIND_ALL);            
+            $comando = DW3BancoDeDados::prepare(self::FIND_AND_PAGINATE);            
         }
+        $comando->bindValue(1, $limit, PDO::PARAM_INT);
+        $comando->bindValue(2, $offset, PDO::PARAM_INT);
+        $comando->execute();
         $list = [];
+        $registros = $comando->fetchAll();
         foreach ($registros as $registro) {
             $list[] = new Bidding(
                 $registro['title'],
@@ -274,5 +278,28 @@ class Bidding extends Modelo
         }
         return $list;
     }
+
+    // public static function findAndPaginate($limit = 8, $offset = 0)
+    // {
+    //     $comando = DW3BancoDeDados::prepare(self::FIND_AND_PAGINATE);
+    //     $comando->bindValue(1, $limit, PDO::PARAM_INT);
+    //     $comando->bindValue(2, $offset, PDO::PARAM_INT);
+    //     $comando->execute();
+    //     $list = [];
+    //     $registros = $comando->fetchAll();     
+    //     foreach ($registros as $registro) {
+    //         $list[] = new Bidding(
+    //             $registro['title'],
+    //             $registro['description'],
+    //             $registro['institutionId'],
+    //             null,
+    //             $registro['value'],
+    //             $registro['userId'],
+    //             $registro['closed'],
+    //             $registro['id']
+    //         );
+    //     }
+    //     return $list;
+    // }
 
 }
