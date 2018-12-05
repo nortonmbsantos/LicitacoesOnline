@@ -19,12 +19,16 @@ class AgencyControlador extends Controlador
 
     public function index()
     {
-        $this->visao('agency/index.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency()]);
+        $this->visao('agency/index.php', 
+        ['user' => $user = $this->getUser(),  
+        'agency' => $agency = $this->getAgency()]);
     }
 
     public function new()
     {
-        $this->visao('agency/new.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency()]);
+        $this->visao('agency/new.php', 
+        ['user' => $user = $this->getUser(),  
+        'agency' => $agency = $this->getAgency()]);
     }
 
     public function create()
@@ -36,15 +40,17 @@ class AgencyControlador extends Controlador
             $this->redirecionar(URL_RAIZ . 'agency');
         } else {
             $this->setErros($agency->getValidacaoErros());
-            $this->visao('agency/new.php', ['user' => $user = $this->getUser(),  'agency' => $agency = $this->getAgency()]);
+            $this->visao('agency/new.php', 
+            ['user' => $user = $this->getUser(),  
+            'agency' => $agency = $this->getAgency()]);
         }
     }
 
     public function biddings()
     {
         $pagination = $this->calculatePagination();     
-        $biddings = Bidding::findByAgency($this->getAgency()->getId());
-        $this->visao('agency/biddings/index.php', ['user' => $this->getUser(),  'agency' => $this->getAgency(),
+        $this->visao('agency/biddings/index.php', 
+        ['user' => $this->getUser(),  'agency' => $this->getAgency(),
         'biddings' => $pagination['biddings'], 'page' => $pagination['page'], 
         'lastPage' => $pagination['lastPage']  
         ]);
