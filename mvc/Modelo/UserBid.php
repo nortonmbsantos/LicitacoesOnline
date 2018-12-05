@@ -50,6 +50,9 @@ class UserBid extends Modelo
 
     protected function verificarErros()
     {
+        if (!is_numeric($this->value)) {
+            $this->setErroMensagem('value', 'Valor deve ser um número.');
+        }
         if ($this->value <= 0) {
             $this->setErroMensagem('value', 'Deve ser um número maior do que zero.');
         }
@@ -65,11 +68,13 @@ class UserBid extends Modelo
         $this->deleteById($this->id);
     }
 
-
     public function update($id)
     {
+        $old = UserBid::findById($id);
+        if($old->getValue() != $this->getValue()){
         $this->deleteById($id);
         $this->save();
+        }
     }
 
     private function insert()
