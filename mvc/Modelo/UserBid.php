@@ -12,7 +12,7 @@ class UserBid extends Modelo
     const DELETE_BY_ID = 'DELETE FROM user_bid WHERE id = ? LIMIT 1';
     const FIND_BY_BIDDING_ID = 'SELECT * FROM user_bid WHERE biddingId = ?';    
     const FIND_BY_USER_AND_BIDDING = 'SELECT * FROM user_bid WHERE userId = ? AND biddingId = ?';
-    const FIND_BEST_BID = 'SELECT userId, MIN(value) AS value, biddingId, id FROM `user_bid` WHERE biddingId = ? LIMIT 1'; //nã retorna o id e userId certos 
+    const FIND_BEST_BID = 'SELECT * FROM user_bid WHERE biddingId = ? AND value = (select MIN(value) from user_bid) LIMIT 1'; //nã retorna o id e userId certos 
     const FIND_ALL = 'SELECT * FROM user_bid';  
     const INSERT = 'INSERT INTO user_bid(biddingId,userId,value) VALUES (?, ?, ?)';
     
@@ -60,8 +60,10 @@ class UserBid extends Modelo
         if (!is_numeric($this->value)) {
             $this->setErroMensagem('value', 'Valor deve ser um número.');
         }
-        if(UserBid::FindById($this->id)->getValue() == $this->value){
-            $this->setErroMensagem('value', 'Valor deve ser diferente do seu lance já existente.');
+        if(UserBid::FindById($this->id) != null){
+            if(UserBid::FindById($this->id)->getValue() == $this->value){
+                $this->setErroMensagem('value', 'Valor deve ser diferente do seu lance já existente.');
+            }
         }
     }
 

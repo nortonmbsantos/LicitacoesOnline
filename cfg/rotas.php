@@ -54,7 +54,7 @@ $rotas = [ // Página inicial
         'POST' => '\Controlador\UserBidControlador#new'
     ],
     '/user/bid/update' => [
-        'POST' => '\Controlador\UserBidControlador#update' // não é post, talvez patch ou put
+        'PATCH' => '\Controlador\UserBidControlador#update'
     ],
     '/user/bid/delete/?' => [
         'DELETE' => '\Controlador\UserBidControlador#delete'

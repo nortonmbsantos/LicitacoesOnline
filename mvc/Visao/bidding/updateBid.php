@@ -4,6 +4,7 @@
 <div class="center-block site">
     <div class="col-sm-offset-3">
         <form class="form-inline" action="<?= URL_RAIZ . 'user/bid/update' ?>" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_metodo" value="PATCH">
             <div class="form-group <?= $this->getErroCss('value') ?>">
                 <label for="value" class="col-6">Atualize seu lance:</label>
                 <input type="text" id="value" name="value" class="form-control col-6" autofocus value="<?= $userBid->getValue() ?>">
