@@ -18,8 +18,7 @@
 
     <?php if(!$bidding->isClosed()) { ?>
         <?php if($agency && $agency->getId() == $bidding->getInstitutionId()) { ?>
-            <?php require_once('bidList.php') ?>
-            <a href="<?= URL_RAIZ . 'bidding/close/' . $bidding->getId()?>" class="btn btn-danger">Fechar</a>        
+            <?= $this->incluirVisao('bidding/closeForm.php') ?>
         <?php } else { ?>
             <?php if($user && $bidding->getValue()==0) { ?>        
                 <?php if($userBid) { ?>        

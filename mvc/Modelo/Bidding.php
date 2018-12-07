@@ -279,27 +279,4 @@ class Bidding extends Modelo
         return $list;
     }
 
-    // public static function findAndPaginate($limit = 8, $offset = 0)
-    // {
-    //     $comando = DW3BancoDeDados::prepare(self::FIND_AND_PAGINATE);
-    //     $comando->bindValue(1, $limit, PDO::PARAM_INT);
-    //     $comando->bindValue(2, $offset, PDO::PARAM_INT);
-    //     $comando->execute();
-    //     $list = [];
-    //     $registros = $comando->fetchAll();     
-    //     foreach ($registros as $registro) {
-    //         $list[] = new Bidding(
-    //             $registro['title'],
-    //             $registro['description'],
-    //             $registro['institutionId'],
-    //             null,
-    //             $registro['value'],
-    //             $registro['userId'],
-    //             $registro['closed'],
-    //             $registro['id']
-    //         );
-    //     }
-    //     return $list;
-    // }
-
 }
