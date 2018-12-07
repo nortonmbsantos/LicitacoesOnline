@@ -15,7 +15,7 @@ $rotas = [ // Página inicial
         'POST' => '\Controlador\UserLoginControlador#session'
     ],
     '/user/logout' => [
-        'GET' => '\Controlador\UserLoginControlador#destroy',
+        'DELETE' => '\Controlador\UserLoginControlador#destroy',
     ], // orgãos públicos
     '/agency' => [ 
         'POST' => '\Controlador\AgencyControlador#create'
@@ -28,7 +28,7 @@ $rotas = [ // Página inicial
         'POST' => '\Controlador\AgencyLoginControlador#session'        
     ],
     '/agency/logout' => [
-        'GET' => '\Controlador\AgencyLoginControlador#destroy'
+        'DELETE' => '\Controlador\AgencyLoginControlador#destroy'
     ],
     '/agency/biddings' => [
         'GET' => '\Controlador\AgencyControlador#biddings'
@@ -44,17 +44,17 @@ $rotas = [ // Página inicial
         'GET' => '\Controlador\BiddingsControlador#show'
     ],
     '/bidding/close/?' => [
-        'GET' => '\Controlador\BiddingsControlador#close'
+        'PATCH' => '\Controlador\BiddingsControlador#close'
     ], 
     '/bidding/filter' => [
-        'POST' =>  '\Controlador\BiddingsControlador#filter'
+        'POST' =>  '\Controlador\BiddingsControlador#filter' //não e com post
     ],
     // Lance do usuário (empresa)
     '/user/bid/new' => [
         'POST' => '\Controlador\UserBidControlador#new'
     ],
     '/user/bid/update' => [
-        'POST' => '\Controlador\UserBidControlador#update'
+        'POST' => '\Controlador\UserBidControlador#update' // não é post, talvez patch ou put
     ],
     '/user/bid/delete/?' => [
         'DELETE' => '\Controlador\UserBidControlador#delete'

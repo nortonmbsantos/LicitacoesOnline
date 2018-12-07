@@ -7,6 +7,10 @@
     <?= $this->getUser()->getUsername(); ?><i class="fas fa-user ml-1"></i>
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <a class="dropdown-item" href="<?= URL_RAIZ . 'user/logout' ?>">Logout</a>
+    <form action="<?= URL_RAIZ . 'user/logout' ?>" method="post">
+        <input type="hidden" name="_metodo" value="DELETE">
+        <button type="submit" class="dropdown-item">Sair</button>
+    </form>
     </div>
 </div>
+

@@ -10,6 +10,9 @@
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
     <a class="dropdown-item" href="<?= URL_RAIZ . 'agency/biddings' ?>">Minhas Licitações</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="<?= URL_RAIZ . 'agency/logout' ?>">Logout</a>
+    <form action="<?= URL_RAIZ . 'agency/logout' ?>" method="post">
+        <input type="hidden" name="_metodo" value="DELETE">
+        <button type="submit" class="dropdown-item">Sair</button>
+    </form>
     </div>
 </div>
