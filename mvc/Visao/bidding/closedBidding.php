@@ -6,6 +6,6 @@
     <p> Valor: R$<?php echo $bidding->getValue() ?></p>
 </div>
 <?php } else { ?>
-    <p>Esta licitação foi fechada sem vencedores! </p>
+    <p>Esta licitação foi fechada sem um vencedor! </p>
 <?php } ?>
 
