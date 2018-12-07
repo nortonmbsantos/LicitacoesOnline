@@ -14,6 +14,7 @@ class UserBid extends Modelo
     const FIND_BY_USER_AND_BIDDING = 'SELECT * FROM user_bid WHERE userId = ? AND biddingId = ?';
     const FIND_BEST_BID = 'SELECT * FROM user_bid WHERE biddingId = ? AND value = (select MIN(value) from user_bid) LIMIT 1'; //nã retorna o id e userId certos 
     const FIND_ALL = 'SELECT * FROM user_bid';  
+    const DELETE_BY_USERID_AND_BIDDINGID = 'DELETE FROM user_bid WHERE userId = ? AND biddingId = ? LIMIT 1';
     const INSERT = 'INSERT INTO user_bid(biddingId,userId,value) VALUES (?, ?, ?)';
     
     private $id;
@@ -120,6 +121,14 @@ class UserBid extends Modelo
     {
         $comando = DW3BancoDeDados::prepare(self::DELETE_BY_ID);
         $comando->bindValue(1, $id, PDO::PARAM_STR);
+        $comando->execute();
+    }
+
+    public static function deleteByUserIdAndBiddingId($userId, $biddingId)
+    {
+        $comando = DW3BancoDeDados::prepare(self::DELETE_BY_USERID_AND_BIDDINGID);
+        $comando->bindValue(1, $userId, PDO::PARAM_STR);
+        $comando->bindValue(2, $biddingId, PDO::PARAM_STR);
         $comando->execute();
     }
     

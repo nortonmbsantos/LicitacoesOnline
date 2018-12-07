@@ -51,7 +51,7 @@ class UserBidControlador extends Controlador
 
     public function delete($id){
         $this->verifyUserLogedIn();
-        UserBid::deleteById($id);
+        UserBid::deleteByUserIdAndBiddingId($this->getUser()->getId(), $id);
         DW3Sessao::setFlash('mensagemFlash', 'Lance excluído.');
         $this->redirecionar(URL_RAIZ . 'bidding/' . $_POST['biddingId']);
     }
