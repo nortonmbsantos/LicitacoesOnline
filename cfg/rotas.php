@@ -47,7 +47,7 @@ $rotas = [ // Página inicial
         'PATCH' => '\Controlador\BiddingsControlador#close'
     ], 
     '/bidding/filter' => [
-        'POST' =>  '\Controlador\BiddingsControlador#filter' //não e com post
+        'GET' =>  '\Controlador\BiddingsControlador#filter' //não e com post
     ],
     // Lance do usuário (empresa)
     '/user/bid/new' => [

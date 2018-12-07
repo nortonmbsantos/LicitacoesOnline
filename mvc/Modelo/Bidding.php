@@ -13,9 +13,11 @@ class Bidding extends Modelo
     const FIND_BY_ID = 'SELECT * FROM biddings WHERE id = ? LIMIT 1';
     const FIND_BY_AGENCY_ID = 'SELECT * FROM biddings WHERE institutionId = ?';    
     const FIND_ALL = 'SELECT * FROM biddings';
-    const FIND_ALL_CLOSED = 'SELECT * FROM biddings WHERE closed = 1';
-    const FIND_ALL_OPEN = 'SELECT * FROM biddings WHERE closed = 0';
-    const FIND_AND_PAGINATE = 'SELECT * FROM biddings ORDER BY id DESC LIMIT ? OFFSET ?';
+    const FIND_ALL_CLOSED_AND_PAGINATE = 'SELECT * FROM biddings WHERE closed = 1 LIMIT ? OFFSET ?';
+    const COUNT_ALL_CLOSED = 'SELECT count(id) FROM biddings WHERE closed = 1';        
+    const FIND_ALL_OPEN_AND_PAGINATE = 'SELECT * FROM biddings WHERE closed = 0 LIMIT ? OFFSET ?';
+    const COUNT_ALL_OPEN = 'SELECT count(id) FROM biddings WHERE closed = 0';    
+    const FIND_AND_PAGINATE = 'SELECT * FROM biddings LIMIT ? OFFSET ?';
     const FIND_LAST_SIX = 'SELECT * FROM biddings ORDER BY id DESC LIMIT 6';    
     const COUNT_ALL = 'SELECT count(id) FROM biddings';
     const FIND_BIDDING_AGENCY = 'SELECT institutionId FROM biddings WHERE id = ? LIMIT 1';    
@@ -158,6 +160,20 @@ class Bidding extends Modelo
         return intval($total[0]);
     }
 
+    public static function countAllOpen()
+    {
+        $registros = DW3BancoDeDados::query(self::COUNT_ALL_OPEN);
+        $total = $registros->fetch();
+        return intval($total[0]);
+    }
+
+    public static function countAllClosed()
+    {
+        $registros = DW3BancoDeDados::query(self::COUNT_ALL_CLOSED);
+        $total = $registros->fetch();
+        return intval($total[0]);
+    }
+
     public static function findByAgency($ID)
     {
         $comando = DW3BancoDeDados::prepare(self::FIND_BY_AGENCY_ID);
@@ -253,10 +269,10 @@ class Bidding extends Modelo
     
     public static function filterBidding($filter, $limit = 8, $offset = 0){
         if ($filter == 'open') {
-            $comando = DW3BancoDeDados::prepare(self::FIND_ALL_OPEN);
+            $comando = DW3BancoDeDados::prepare(self::FIND_ALL_OPEN_AND_PAGINATE);
         } elseif ($filter == 'closed') {
-            $comando = DW3BancoDeDados::prepare(self::FIND_ALL_CLOSED);
-        } else {
+            $comando = DW3BancoDeDados::prepare(self::FIND_ALL_CLOSED_AND_PAGINATE);
+        } elseif ($filter == 'all') {
             $comando = DW3BancoDeDados::prepare(self::FIND_AND_PAGINATE);            
         }
         $comando->bindValue(1, $limit, PDO::PARAM_INT);

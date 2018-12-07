@@ -20,13 +20,20 @@ class BiddingsControlador extends Controlador
         return compact('page', 'biddings', 'lastPage');
     }
 
-    private function indexPagination($filter)
+    private function filterPagination($filter)
     {
         $page = array_key_exists('p', $_GET) ? intval($_GET['p']) : 1;
         $limit = 8;
         $offset = ($page - 1) * $limit;
         $biddings = Bidding::filterBidding($filter, $limit, $offset);
-        $lastPage = ceil(count($biddings) / $limit);
+        if ($filter == 'open') {
+            $lastPage = ceil(Bidding::countAllOpen() / $limit);
+        } elseif ($filter == 'closed') {
+            $lastPage = ceil(Bidding::countAllClosed() / $limit);            
+        } elseif ($filter == 'all') {
+            $lastPage = ceil(Bidding::countAll() / $limit);                        
+        }
+        var_dump(Bidding::countAllClosed());
         return compact('page', 'biddings', 'lastPage');
     }
 
@@ -84,6 +91,7 @@ class BiddingsControlador extends Controlador
 
     public function close($ID)
     {
+        $this->verifyAgencyLogedIn();
         $userBid = UserBid::findBiddingToClose($ID);   
         Bidding::closeBidding($userBid->getValue(), $userBid->getUserId(), $ID);
         DW3Sessao::setFlash('mensagemFlash', 'Licitação fechada com sucesso.');
@@ -92,8 +100,8 @@ class BiddingsControlador extends Controlador
 
     public function filter(){
         $this->verifyLogedIn();
-        $filter = $_POST['biddingFilter'];
-        $pagination = $this->indexPagination($filter);
+        $filter = $_GET['biddingFilter'];
+        $pagination = $this->filterPagination($filter);
         $this->visao('bidding/index.php', ['user' => $this->getUser(),  'agency' => $this->getAgency(),
          'biddings' => $pagination['biddings'], 'page' => $pagination['page'], 
          'lastPage' => $pagination['lastPage'], 'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
