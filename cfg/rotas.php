@@ -5,7 +5,6 @@ $rotas = [ // Página inicial
         'GET' => '\Controlador\AppControlador#index',
     ], // Usuário (empresas)
     '/user' => [ 
-        'GET' => '\Controlador\UserControlador#index',
         'POST' => '\Controlador\UserControlador#create'
     ],
     '/user/new' => [
@@ -19,7 +18,6 @@ $rotas = [ // Página inicial
         'GET' => '\Controlador\UserLoginControlador#destroy',
     ], // orgãos públicos
     '/agency' => [ 
-        'GET' => '\Controlador\AgencyControlador#index',
         'POST' => '\Controlador\AgencyControlador#create'
     ],
     '/agency/new' => [

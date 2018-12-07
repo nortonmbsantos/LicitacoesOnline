@@ -22,7 +22,9 @@ class UserControlador extends Controlador
 
         if ($user->isValido()) {
             $user->save();
-            $this->redirecionar(URL_RAIZ . 'user');
+            DW3Sessao::set('user', $user->getId());
+            DW3Sessao::setFlash('mensagemFlash', 'Login efetuado com sucesso.');
+            $this->redirecionar(URL_RAIZ);
         } else {
             $this->setErros($user->getValidacaoErros());
             $this->visao('user/new.php', ['user' => $this->getUser(),  'agency' => $this->getAgency()]);

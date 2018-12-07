@@ -3,6 +3,8 @@ namespace Controlador;
 
 use \Modelo\Agency;
 use \Modelo\Bidding;
+use \Framework\DW3Sessao;
+
 
 class AgencyControlador extends Controlador
 {
@@ -37,7 +39,9 @@ class AgencyControlador extends Controlador
 
         if ($agency->isValido()) {
             $agency->save();
-            $this->redirecionar(URL_RAIZ . 'agency');
+            DW3Sessao::set('agency', $agency->getId());
+            DW3Sessao::setFlash('mensagemFlash', 'Login efetuado com sucesso.'); 
+            $this->redirecionar(URL_RAIZ);
         } else {
             $this->setErros($agency->getValidacaoErros());
             $this->visao('agency/new.php', 
