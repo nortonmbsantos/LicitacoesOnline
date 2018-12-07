@@ -15,10 +15,6 @@
                 <input type="hidden" id="biddingId" name="biddingId" value="<?= $bidding->getId() ?>">
             </div>
                 <button type="submit" class="btn btn-success center-block">Atualizar Lance</button>
-
-                <div class="form-group <?= $this->getErroCss('value') ?>">
-                <?php $this->incluirVisao('shared/formErro.php', ['campo' => 'value']) ?>
-                </div>
         </form>
     </div>
 </div>
@@ -29,4 +25,7 @@
         <button type="submit" class="btn btn-danger float-right">Desistir do lance</button>
     </form>
 
+    <div class="form-group <?= $this->getErroCss('value') ?>">
+        <?php $this->incluirVisao('shared/formErro.php', ['campo' => 'value']) ?>
+    </div>
 </div>

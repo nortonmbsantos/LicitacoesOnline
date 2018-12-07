@@ -32,15 +32,15 @@ class UserBidControlador extends Controlador
     public function update(){
         $this->verifyUserLogedIn();
         $userBid = UserBid::findByUserAndBidding($this->getUser()->getId(), $_POST['biddingId']);
-        $bidding = Bidding::findById($_POST['biddingId']);        
-        $bid = new UserBid($_POST['userId'], $_POST['biddingId'], $_POST['value']);
+        $userBid->setValue($_POST['value']);
+        $bidding = Bidding::findById($_POST['biddingId']);
 
-        if ($bid->isValido()) {
-            $bid->update($userBid->getId());
+        if ($userBid->isValido()) {
+            $userBid->update();
             DW3Sessao::setFlash('mensagemFlash', 'Lance atualizado.');
             $this->redirecionar(URL_RAIZ . 'bidding/' . $_POST['biddingId']);
         } else {
-            $this->setErros($bid->getValidacaoErros());
+            $this->setErros($userBid->getValidacaoErros());
             DW3Sessao::setFlash('mensagemFlash', 'Lance não pode ser atualizado.');
             $this->visao('bidding/show.php', 
             ['user' => $this->getUser(),  'agency' => $this->getAgency(),

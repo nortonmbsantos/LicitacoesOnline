@@ -48,13 +48,20 @@ class UserBid extends Modelo
         return $this->value;
     }
 
+    public function setValue($newValue){
+        $this->value = $newValue;
+    }
+
     protected function verificarErros()
     {
+        if ($this->value <= 0) {
+            $this->setErroMensagem('value', 'Deve ser um número maior do que zero.');
+        }
         if (!is_numeric($this->value)) {
             $this->setErroMensagem('value', 'Valor deve ser um número.');
         }
-        if ($this->value <= 0) {
-            $this->setErroMensagem('value', 'Deve ser um número maior do que zero.');
+        if(UserBid::FindById($this->id)->getValue() == $this->value){
+            $this->setErroMensagem('value', 'Valor deve ser diferente do seu lance já existente.');
         }
     }
 
@@ -68,12 +75,12 @@ class UserBid extends Modelo
         $this->deleteById($this->id);
     }
 
-    public function update($id)
+    public function update()
     {
-        $old = UserBid::findById($id);
+        $old = UserBid::findById($this->id);
         if($old->getValue() != $this->getValue()){
-        $this->deleteById($id);
-        $this->save();
+            $this->delete();
+            $this->save();
         }
     }
 
